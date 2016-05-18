@@ -52,15 +52,23 @@
         width: window.innerWidth,
         height: window.innerHeight,
         scale: 1,
-        antialias: false
+        antialias: false,
+        //设置透明
+        alpha: true
       });
       this.renderer.setSize(window.innerWidth, window.innerHeight);
+      console.log(window.innerWidth, window.innerHeight);
+      //设置场景颜色
+      this.renderer.setClearColor(0xf3f3f3, 1);
       this.container = document.createElement('div');
       this.container.id = 'canvasGL';
       this.container.appendChild(this.renderer.domElement);
       this.camera.lookAt(new THREE.Vector3());
       document.getElementById('experience').appendChild(this.container);
       this.terrain = new Terrain(this.scene);
+      //场景的灯光
+      var ambientLight = new THREE.AmbientLight( 0xf3f3f3);
+      this.scene.add( ambientLight );
       this.scene.add(this.terrain.plane_mesh);
       return this.update();
     };
@@ -101,12 +109,12 @@
       noise_range: 2.14,
       sombrero_amplitude: 0.6,
       sombrero_frequency: 10.0,
-      speed: 0.8,
+      speed: 0.4,
       segments: 324,
-      wireframe_color: '#e25cfe',
+      wireframe_color: '#ffffff',
       perlin_passes: 1,
       wireframe: true,
-      floor_visible: true
+      floor_visible: false//groundMaterial.visible 地面颜色
     };
 
     Terrain.prototype.scene = null;
@@ -244,9 +252,11 @@
       this.groundMaterial = new THREE.MeshPhongMaterial({
         ambient: 0xffffff,
         color: 0xffffff,
-        specular: 0x050505
+        specular: 0xf3f3f3,
+        transparent: 1,
+        opacity: 0.9
       });
-      this.groundMaterial.color.setHSL(0.095, 1, 0.75);
+      this.groundMaterial.color.setRGB(243,243,243);//
       this.materials = [this.groundMaterial, this.plane_material];
       this.plane_mesh = THREE.SceneUtils.createMultiMaterialObject(this.plane_geometry, this.materials);
       this.plane_mesh.rotation.x = -Math.PI / 2;
