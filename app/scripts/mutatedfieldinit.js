@@ -114,7 +114,7 @@
       wireframe_color: '#ffffff',
       perlin_passes: 1,
       wireframe: true,
-      floor_visible: false//groundMaterial.visible 地面颜色
+      floor_visible: true//groundMaterial.visible 地面颜色
     };
 
     Terrain.prototype.scene = null;

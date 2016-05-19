@@ -2,17 +2,33 @@
 <html lang="zh-Hans">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="renderer" content="webkit"/>
+
+    {% block seotag %}
 	<meta name="keywords" content="{{keywords}}" />
     <meta name="description" content="{{description}}" />
+    {% endblock %}
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
     <title>{{pageTitle}}</title>
     <link rel="shortcut icon" href="/favicon.ico">
+
+    {% block styles %}
+    <!-- build:css(.) styles/vendor.css -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+    <!-- endbuild -->
+    <!-- build:css(.tmp/) styles/main.css -->
     <link rel="stylesheet" href="/styles/main.css" />
+    <!-- endbuild -->
+    {%if pageName %}
+    <!-- build:css(.tmp/) styles/{{pageName}}.css -->
+    <link rel="stylesheet" href="/styles/{{pageName}}.css" />
+    <!-- endbuild -->
+    {% endif %} 
+    {% endblock %}
+
 </head>
 <body>
 	{% block header %}
@@ -28,7 +44,9 @@
     {% endblock %}
 
     {% block scripts %}
-    	
+    <!-- build:js(.) scripts/vendors.js -->
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- endbuild -->
     {% endblock %}
 
 </body>
