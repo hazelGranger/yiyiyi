@@ -46,6 +46,7 @@
       this.scene = new THREE.Scene();
       this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100000);
       console.log(this.camera);
+      this.camera.position.x= 0;
       this.camera.position.z = 7;
       this.camera.position.y = 1;
       this.renderer = new THREE.WebGLRenderer({
@@ -63,7 +64,9 @@
       this.container = document.createElement('div');
       this.container.id = 'canvasGL';
       this.container.appendChild(this.renderer.domElement);
-      this.camera.lookAt(new THREE.Vector3());
+      this.camera.lookAt(new THREE.Vector3(0,0,0));
+      var testv = new THREE.Vector3();
+      console.log(testv);
       document.getElementById('experience').appendChild(this.container);
       this.terrain = new Terrain(this.scene);
       //场景的灯光
@@ -89,6 +92,49 @@
       return this.renderer.setSize(stageWidth, stageHeight);
     };
 
+    App.prototype.movecamera = function(){
+      var desX = 0,
+          desY = -3,
+          desZ = 9;
+      //console.log(123);
+      var judgeX = Math.abs(desX - this.camera.position.x );
+      var judgeY = Math.abs(desY - this.camera.position.y );
+      var judgeZ = Math.abs(desZ - this.camera.position.z );
+      var pace = 0.05;
+      //if (desX  this.camera.position.x || desY != this.camera.position.y || desZ != this.camera.position.z) {
+      if (judgeY >0.05){
+      //if(true){
+        console.log(this.camera.position.x, this.camera.position.y, this.camera.position.z);
+        requestAnimationFrame(this.movecamera.bind(this));
+
+        this.camera.position.y -= pace;
+
+        // if (desX < this.camera.position.x) {
+        //   this.camera.position.x -= 0.05;
+        // }
+        // if (desX > this.camera.position.x) {
+        //   this.camera.position.x += 0.05;
+        // }
+        // if (desY < this.camera.position.y) {
+        //   this.camera.position.y -= 0.05;
+        // }
+        // if (desY > this.camera.position.y) {
+        //   this.camera.position.y += 0.05;
+        // }
+        // if (desZ < this.camera.position.z) {
+        //   this.camera.position.z -= 0.05;
+        // }
+        // if (desZ > this.camera.position.z) {
+        //   this.camera.position.z += 0.05;
+        // }
+        // return this.update();
+      } 
+      
+       // this.camera.position.z = 9;
+       // this.camera.position.y = -4;
+       
+    };
+
     return App;
 
   })();
@@ -111,7 +157,7 @@
       sombrero_frequency: 10.0,
       speed: 0.4,
       segments: 324,
-      wireframe_color: '#ffffff',
+      wireframe_color: '#000000',
       perlin_passes: 1,
       wireframe: true,
       floor_visible: false//groundMaterial.visible 地面颜色
@@ -254,7 +300,7 @@
         color: 0xffffff,
         specular: 0xf3f3f3,
         transparent: 1,
-        opacity: 0.9
+        opacity: 1
       });
       this.groundMaterial.color.setRGB(243,243,243);//
       this.materials = [this.groundMaterial, this.plane_material];
@@ -267,6 +313,12 @@
       return this.plane_material.uniforms['time'].value = this.clock.getElapsedTime();
     };
 
+    Terrain.prototype.rotate = function(){
+      requestAnimationFrame(this.rotate.bind(this));
+      this.plane_mesh.rotation.x -= 0.01;
+
+    };
+
     return Terrain;
 
   })();
@@ -274,5 +326,14 @@
   App = new window.App();
 
   App.init();
+
+  document.getElementById("movecamera").addEventListener("click", function(){
+    //console.log('123');
+    App.movecamera();
+  });
+
+  document.getElementById("rotate").addEventListener("click", function(){
+    App.terrain.rotate();
+  })
 
 }).call(this);

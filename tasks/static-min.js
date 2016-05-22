@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     grunt.task.run([
       'useminPrepare',
       'imagemin',
-      //'svgmin',
+      'svgmin',
       'concat',
       'cssmin',
       'uglify',
