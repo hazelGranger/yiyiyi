@@ -45,7 +45,15 @@
 
     {% block scripts %}
     <!-- build:js(.) scripts/vendors.js -->
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <!--<script src="/bower_components/jquery/dist/jquery.min.js"></script>-->
+    <!-- endbuild -->
+
+    <!-- build:js(.tmp/) scripts/util.js -->
+        <script type="text/javascript" src="/scripts/jquery.js"></script>
+        <script type="text/javascript" src="/scripts/cbsplit.js"></script>
+        <script type="text/javascript" src="/scripts/jquery.ba-hashchange.js"></script>
+        <script type="text/javascript" src="/scripts/jquery.router.js"></script>
+        <script type="text/javascript" src="/scripts/myrouter.js"></script>
     <!-- endbuild -->
     {% endblock %}
 

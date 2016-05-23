@@ -45,8 +45,9 @@
     App.prototype.init = function() {
       this.scene = new THREE.Scene();
       this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100000);
+      this.camera.position.x = 0;
+      this.camera.position.y = 1;
       this.camera.position.z = 7;
-      this.camera.position.y = -2;
       this.renderer = new THREE.WebGLRenderer({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -87,6 +88,23 @@
       this.camera.updateProjectionMatrix();
       return this.renderer.setSize(stageWidth, stageHeight);
     };
+
+    App.prototype.movecamera = function(){
+      //相机目标坐标
+       var desX = 0,
+          desY = -3,
+          desZ = 9;
+      //判断参数以及变化步长 
+      var judgeX = Math.abs(desX - this.camera.position.x );
+      var judgeY = Math.abs(desY - this.camera.position.y );
+      var judgeZ = Math.abs(desZ - this.camera.position.z );
+      var pace = 0.05;
+
+      if (judgeY >0.05){
+        requestAnimationFrame(movecamera);
+        this.camera.position.y -= pace;
+      }
+    }
 
     return App;
 
@@ -271,9 +289,10 @@
       return this.plane_material.uniforms['time'].value = this.clock.getElapsedTime();
     };
 
-    Terrain.prototype.rotate = function(){
-      this.plane_mesh.rotation.x +=180;
-    }
+    Terrain.prototype.rotateX = function(){
+      requestAnimationFrame(this.rotateX.bind(this));
+      this.plane_mesh.rotation.x -= 0.01;
+    };
 
     return Terrain;
 
@@ -286,6 +305,10 @@
   window.addEventListener('resize', function(){
     App.resize(this.innerWidth,this.innerHeight);
   });
+
+  document.getElementById("work").addEventListener('click', function(){
+    App.terrain.rotateX();
+  })
 
 
 
