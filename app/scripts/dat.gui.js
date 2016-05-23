@@ -3027,7 +3027,7 @@ dat.controllers.ColorController = (function (Controller, dom, Color, interpret, 
     var value_field = document.createElement('div');
 
     common.extend(this.__selector.style, {
-      width: '122px',
+      width: '125px',
       height: '102px',
       padding: '3px',
       backgroundColor: '#222',

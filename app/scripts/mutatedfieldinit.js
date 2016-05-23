@@ -45,9 +45,8 @@
     App.prototype.init = function() {
       this.scene = new THREE.Scene();
       this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100000);
-      console.log(this.camera);
       this.camera.position.z = 7;
-      this.camera.position.y = 1;
+      this.camera.position.y = -2;
       this.renderer = new THREE.WebGLRenderer({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -57,9 +56,9 @@
         alpha: true
       });
       this.renderer.setSize(window.innerWidth, window.innerHeight);
-      console.log(window.innerWidth, window.innerHeight);
+      //console.log(window.innerWidth, window.innerHeight);
       //设置场景颜色
-      this.renderer.setClearColor(0xf3f3f3, 1);
+      this.renderer.setClearColor(0xffffff, 1);
       this.container = document.createElement('div');
       this.container.id = 'canvasGL';
       this.container.appendChild(this.renderer.domElement);
@@ -67,7 +66,7 @@
       document.getElementById('experience').appendChild(this.container);
       this.terrain = new Terrain(this.scene);
       //场景的灯光
-      var ambientLight = new THREE.AmbientLight( 0xf3f3f3);
+      var ambientLight = new THREE.AmbientLight( 0xffffff);
       this.scene.add( ambientLight );
       this.scene.add(this.terrain.plane_mesh);
       return this.update();
@@ -111,7 +110,7 @@
       sombrero_frequency: 10.0,
       speed: 0.4,
       segments: 324,
-      wireframe_color: '#ffffff',
+      wireframe_color: '#000000',
       perlin_passes: 1,
       wireframe: true,
       floor_visible: true//groundMaterial.visible 地面颜色
@@ -226,7 +225,6 @@
       })(this));
       this.gui.values.wireframe_color.onChange((function(_this) {
         return function(value) {
-          console.log('value');
           _this.uniforms.line_color.value = new THREE.Color(value);
         };
       })(this));
@@ -249,23 +247,33 @@
         transparent: true,
         uniforms: this.uniforms
       });
+      //地板
       this.groundMaterial = new THREE.MeshPhongMaterial({
         ambient: 0xffffff,
         color: 0xffffff,
-        specular: 0xf3f3f3,
+        specular: 0xffffff,
         transparent: 1,
-        opacity: 0.9
+        opacity: 1
       });
-      this.groundMaterial.color.setRGB(243,243,243);//
+      //this.groundMaterial.color.setRGB(243,243,243);//
       this.materials = [this.groundMaterial, this.plane_material];
       this.plane_mesh = THREE.SceneUtils.createMultiMaterialObject(this.plane_geometry, this.materials);
-      this.plane_mesh.rotation.x = -Math.PI / 2;
+      //this.plane_mesh.rotation.x = -0.5;
+      //rotation pi/2 = 90 degree
+      this.plane_mesh.rotation.x = -Math.PI/2;
+      //this.plane_mesh.rotation.z = Math.PI / 2;
+      //this.plane_mesh.rotation.y = Math.PI / 2 - 1;
+      //return this.plane_mesh.position.y = -0.5;
       return this.plane_mesh.position.y = -0.5;
     };
 
     Terrain.prototype.update = function() {
       return this.plane_material.uniforms['time'].value = this.clock.getElapsedTime();
     };
+
+    Terrain.prototype.rotate = function(){
+      this.plane_mesh.rotation.x +=180;
+    }
 
     return Terrain;
 
@@ -274,5 +282,11 @@
   App = new window.App();
 
   App.init();
+  //窗口大小移动事件
+  window.addEventListener('resize', function(){
+    App.resize(this.innerWidth,this.innerHeight);
+  });
+
+
 
 }).call(this);
