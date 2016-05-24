@@ -1,6 +1,8 @@
-(function() {
+
   var App,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  var rotateXAction = false;
 
   window.App = (function() {
     App.prototype.canvasGL = null;
@@ -290,8 +292,31 @@
     };
 
     Terrain.prototype.rotateX = function(){
-      requestAnimationFrame(this.rotateX.bind(this));
-      this.plane_mesh.rotation.x -= 0.01;
+
+         requestAnimationFrame(this.rotateX.bind(this));
+         this.plane_mesh.rotation.x -= 0.01;
+        //console.log(this.plane_mesh.rotation.x);
+      
+    };
+
+    Terrain.prototype.rotateX360 = function(argument){
+       if (Math.abs(this.plane_mesh.rotation.x + 2.5*Math.PI) > 0.01) {
+          this.plane_mesh.rotation.x -= 0.01;
+          requestAnimationFrame(this.rotateX360.bind(this));
+       }
+    };
+
+    Terrain.prototype.rotateX180 = function(argument){
+       if (Math.abs(this.plane_mesh.rotation.x + 1.5*Math.PI) > 0.01) {
+          this.plane_mesh.rotation.x -= 0.01;
+          requestAnimationFrame(this.rotateX180.bind(this));
+       }
+    };
+
+
+
+    Terrain.prototype.rotateXStop = function(){
+      //this.plane_mesh.rotation.x = 0;
     };
 
     return Terrain;
@@ -307,9 +332,8 @@
   });
 
   document.getElementById("work").addEventListener('click', function(){
-    App.terrain.rotateX();
+  // App.terrain.rotateX();
   })
 
 
 
-}).call(this);

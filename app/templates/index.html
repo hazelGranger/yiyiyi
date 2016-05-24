@@ -2,8 +2,10 @@
 
 {% block content %}
 	<section class="bg">
-		
 		<div id="experience"></div>
+		<div class="content">
+			<img src="/images/middle.svg" alt="">
+		</div>
 	</section>
 	<script id="shader-vertex-terrain-perlin" type="x-shader/x-vertex">
 	    vec3 mod289(vec3 x)
@@ -502,8 +504,6 @@
 {% block scripts %}
 	 {% parent %}
 	 <!-- build:js scripts/index.js -->
-	 <script src="/scripts/three.min.js"></script>
-	 <script src="/scripts/dat.gui.js"></script>
-	 <script type="text/javascript" src="/scripts/mutatedfieldinit.js"></script>
+	 
 	 <!-- endbuild -->
 {% endblock %}

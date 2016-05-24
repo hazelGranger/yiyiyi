@@ -2,9 +2,11 @@ $(function(){
 
 	$('body').route('works/',function(request){
 		console.log('works');
-		window.App.terrain.rotate();
+		//rotateXAction =true;
+		App.terrain.rotateX180();
 	}).route('about/',function(){
 		console.log('about');
+		App.terrain.rotateXStop();
 	}).route('contact/',function(){
 		console.log('contact');
 	}).route('/',function(){
