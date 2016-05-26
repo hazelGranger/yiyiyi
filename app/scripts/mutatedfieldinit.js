@@ -66,7 +66,7 @@
       this.container.id = 'canvasGL';
       this.container.appendChild(this.renderer.domElement);
       this.camera.lookAt(new THREE.Vector3());
-      //document.getElementById('experience').appendChild(this.container);
+      document.getElementById('experience').appendChild(this.container);
       this.terrain = new Terrain(this.scene);
       //场景的灯光
       var ambientLight = new THREE.AmbientLight( 0xffffff);
@@ -276,6 +276,7 @@
         opacity: 1
       });
       //this.groundMaterial.color.setRGB(243,243,243);//
+      this.groundMaterial.side = THREE.DoubleSide; //设置地板是双面的
       this.materials = [this.groundMaterial, this.plane_material];
       this.plane_mesh = THREE.SceneUtils.createMultiMaterialObject(this.plane_geometry, this.materials);
       //this.plane_mesh.rotation.x = -0.5;
@@ -291,6 +292,7 @@
       return this.plane_material.uniforms['time'].value = this.clock.getElapsedTime();
     };
 
+    // rotate.x 初始值为 -pi/2
     Terrain.prototype.rotateX = function(){
 
          requestAnimationFrame(this.rotateX.bind(this));
@@ -307,9 +309,18 @@
     };
 
     Terrain.prototype.rotateX180 = function(argument){
-       if (Math.abs(this.plane_mesh.rotation.x + 1.5*Math.PI) > 0.01) {
+        //console.log(this.plane_mesh.rotation.x);
+       if (Math.abs(this.plane_mesh.rotation.x + 1.5*Math.PI + 0.4) > 0.01) {
           this.plane_mesh.rotation.x -= 0.01;
           requestAnimationFrame(this.rotateX180.bind(this));
+       }
+    };
+
+    Terrain.prototype.rotateX180reverse = function(argument){
+        //console.log(this.plane_mesh.rotation.x);
+       if (Math.abs(-this.plane_mesh.rotation.x + 0.5*Math.PI -0.4 ) > 0.01) {
+          this.plane_mesh.rotation.x += 0.01;
+          requestAnimationFrame(this.rotateX180reverse.bind(this));
        }
     };
 
@@ -331,9 +342,6 @@
     App.resize(this.innerWidth,this.innerHeight);
   });
 
-  document.getElementById("work").addEventListener('click', function(){
-  // App.terrain.rotateX();
-  })
 
 
 

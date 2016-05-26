@@ -25,10 +25,15 @@ $(function(){
 
 	}
 
+	var pageStates ={
+
+	}
+
 	$('body').route('works/',function(request){
 		console.log('works');
 		//rotateXAction =true;
-		App.terrain.rotateX180();
+		//App.terrain.rotateX180();
+		App.terrain.rotateX180reverse();
 
 	}).route('about/',function(){
 
