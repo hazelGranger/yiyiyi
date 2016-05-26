@@ -7,19 +7,19 @@ $(function(){
 		works: {
 			route: "works/",
 			styles: ["/styles/page1.css"],
-			scripts: ["/scripts/scripts1.js"],
+			scripts: ["/scripts/asynchronous/scripts1.js"],
 			dom: "/contents/main.html"
 		},
 		about: {
 			route: "about/",
 			styles: ["/styles/page1.css"],
-			scripts: ["/scripts/scripts1.js"],
+			scripts: ["/scripts/asynchronous/scripts1.js"],
 			dom: "/contents/main.html"
 		},
 		contact: {
 			route: "contact/",
-			styles: ["/styles/page1.css","/styles/page2.css"],
-			scripts: ["/scripts/scripts1.js","/scripts/scripts2.js"],
+			styles: ["/styles/asynchronous/page1.css","/styles/asynchronous/page2.css"],
+			scripts: ["/scripts/asynchronous/scripts1.js","/scripts/asynchronous/scripts2.js"],
 			dom: "/contents/main.html"
 		}
 

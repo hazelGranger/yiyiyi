@@ -217,7 +217,9 @@ module.exports = function(grunt) {
         files: {
           src: [
             '<%= config.dist %>/scripts/{,*/,**/,***/}*.js',
+            '!<%= config.dist %>/scripts/asynchronous/*.js',//除去异步文件夹里的js
             '<%= config.dist %>/styles/{,*/,**/,***/}*.css',
+            '!<%= config.dist %>/styles/asynchronous/*.css',//除去异步文件夹里的css
             '<%= config.dist %>/images/{,*/,**/,***/}*.*',
             '<%= config.dist %>/fonts/{,*/,**/,***/}*.*'
             // ,
@@ -341,7 +343,7 @@ module.exports = function(grunt) {
             if(/^(http|\/\/)/.test(url)){
               return url
             }
-            return '/'+url
+            return url
           }
         },
         files: [{

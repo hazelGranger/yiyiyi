@@ -66,7 +66,7 @@
       this.container.id = 'canvasGL';
       this.container.appendChild(this.renderer.domElement);
       this.camera.lookAt(new THREE.Vector3());
-      document.getElementById('experience').appendChild(this.container);
+      //document.getElementById('experience').appendChild(this.container);
       this.terrain = new Terrain(this.scene);
       //场景的灯光
       var ambientLight = new THREE.AmbientLight( 0xffffff);

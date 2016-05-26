@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit"/>
+
+    {% block seotag %}
+	<meta name="keywords" content="{{keywords}}" />
+    <meta name="description" content="{{description}}" />
+    {% endblock %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
+    <title>{{pageTitle}}</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    {% block styles %}
+    <!-- 异步样式 -->
+    <!-- build:css(.tmp/) styles/asynchronous/page1.css -->
+    <link rel="stylesheet" href="/styles/asynchronous/page1.css" />
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp/) styles/asynchronous/page2.css -->
+    <link rel="stylesheet" href="/styles/asynchronous/page2.css" />
+    <!-- endbuild -->
+    {% endblock %}
+
+</head>
+<body>
+	{% block header %}
+		{% include "_header.html" %}
+	{% endblock %}
+
+	{% block content %}
+  		<p>contnets goes here</p>
+    {% endblock %}
+
+    {% block footer %}
+      {% include "_footer.html" %}
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- build:js(.) scripts/vendors.js -->
+        
+    <!-- endbuild -->
+
+    <!-- build:js scripts/asynchronous/scripts1.js -->
+    <script type="text/javascript" src="/scripts/asynchronous/scripts1.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/asynchronous/scripts2.js -->
+    <script type="text/javascript" src="/scripts/asynchronous/scripts2.js"></script>
+    <!-- endbuild -->
+    {% endblock %}
+
+</body>
+</html>

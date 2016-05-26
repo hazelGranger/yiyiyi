@@ -27,6 +27,14 @@
     <link rel="stylesheet" href="/styles/{{pageName}}.css" />
     <!-- endbuild -->
     {% endif %} 
+    <!-- 异步样式 -->
+    <!-- build:css(.tmp/) styles/asynchronous/page1.css -->
+    <!--<link rel="stylesheet" href="/styles/asynchronous/page1.css" />-->
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp/) styles/asynchronous/page2.css -->
+    <!--<link rel="stylesheet" href="/styles/asynchronous/page2.css" />-->
+    <!-- endbuild -->
     {% endblock %}
 
 </head>
@@ -45,16 +53,17 @@
 
     {% block scripts %}
     <!-- build:js(.) scripts/vendors.js -->
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        
     <!-- endbuild -->
 
-    <!-- build:js(.tmp/) scripts/util.js -->
+    <!-- build:js scripts/util.js -->
+        <script src="/scripts/jquery.js"></script>
         <script type="text/javascript" src="/scripts/cbsplit.js"></script>
         <script type="text/javascript" src="/scripts/jquery.ba-hashchange.js"></script>
         <script type="text/javascript" src="/scripts/jquery.router.js"></script>
         <script src="/scripts/three.min.js"></script>
         <script src="/scripts/dat.gui.js"></script>
-        <script type="text/javascript" src="/scripts/mutatedfieldinit.js"></script>
+        <script src="/scripts/mutatedfieldinit.js"></script>
         <script type="text/javascript" src="/scripts/myrouter.js"></script>
     <!-- endbuild -->
     {% endblock %}
