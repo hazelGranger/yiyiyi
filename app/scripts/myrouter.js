@@ -2,7 +2,9 @@ $(function(){
 	//异步加载配置，书写顺序和加载顺序有关
 	var loadingSettings = {
 		index: {
-			route: "/"
+			route: "/",
+			scripts: ["/scripts/asynchronous/index.js"],
+			dom: "/contents/index.html"
 		},
 		works: {
 			route: "works/",
@@ -26,23 +28,23 @@ $(function(){
 	}
 
 	var pageStates ={
-
+		loading:  false
 	}
 
 	$('body').route('works/',function(request){
-		console.log('works');
+		//console.log('works');
 		//rotateXAction =true;
 		//App.terrain.rotateX180();
 		App.terrain.rotateX180reverse();
 
 	}).route('about/',function(){
 
-		console.log('about');
+		//console.log('about');
 		App.terrain.rotateXStop();
 
 	}).route('contact/',function(){
 		
-		console.log('contact');
+		//console.log('contact');
 		$.get(loadingSettings.contact.dom,function(data){
 			$('.load-contents').html(data);
 			loadStyles(loadingSettings.contact.styles);
@@ -50,17 +52,23 @@ $(function(){
 		});
 		
 	}).route('/',function(){
-		console.log('main');
+		//console.log('main');
+	}).route('',function(){
+		console.log('123');
 	});
 
 
 	var routerResolve = function(){
 		var hash = location.hash.replace(/^#/, '');
 		if (hash) {
+			//other pages with # in router
 			var match = $.routeMatches(hash);
 			if (match) {
 				match.route.callback.apply(match.route.callback, match.args);
 			}
+		}else{
+			//index page
+			mainInit(loadingComplete);	
 		}
 	}
 
@@ -80,6 +88,28 @@ $(function(){
 	}
 
 	var loading = function(){
+		$('.loading').fadeIn();
+	}
+
+	var loadingComplete =  function(){
+		$('.loading').fadeOut();
+	}
+
+	var mainInit = function(callback){
+		loading();
+		pageStates.loading = true;
+		$.get(loadingSettings.index.dom,function(data){
+			$('.load-contents').html(data);
+			//loadScripts(loadingSettings.index.scripts);
+			(callback && typeof(callback) === "function") && callback();
+		});
+	}
+
+	var mainAnimation = function(){
+
+	}
+
+	var textAnimation = function(){
 
 	}
 

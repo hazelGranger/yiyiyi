@@ -67,17 +67,47 @@ section.bg{
 			position: absolute;
 			top: 35%;
 			.animation(translateThree 2s linear);
-			opacity: 0;
-			&.img1{
-				left: 50%;
-			}
-			&.img2{
-				left: 40%;
-				.animation-delay(2.1s);
-			}
-			&.img3{
-				left: 60%;
-				.animation-delay(4.2s);
+		}
+	}
+}
+
+.loading{
+	font-size: 20px;
+	color: #000;
+	display: none;
+	//opacity: 0;
+	position: absolute;
+	z-index: 1;
+	top: 40%;
+	left: 50%;
+	font-size: 40px;
+	margin-left: -20px;
+	// .animation(opacity 0.5s ease-in-out);
+	// &.active{
+	// 	opacity: 1;
+	// }
+}
+
+.load-contents{
+	opacity: 0;
+	&.active{
+		opacity: 1;
+		.index{
+			&.active{
+				
+				img{
+					&.img1{
+						left: 50%;
+					}
+					&.img2{
+						left: 40%;
+						.animation-delay(2.1s);
+					}
+					&.img3{
+						left: 60%;
+						.animation-delay(4.2s);
+					}
+				}
 			}
 		}
 	}
