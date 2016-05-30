@@ -27,7 +27,7 @@ body{
 
 @-webkit-keyframes translateThree{
 	0%{
-		.transform(translate3d(0,0,-1000px));
+		.transform(translate3d(0,0,-1500px));
 		opacity: 0;
 	}
 	10%{
@@ -37,7 +37,7 @@ body{
 		opacity: 1;
 	}
 	100%{
-		.transform(translate3d(0,0,1000px));
+		.transform(translate3d(0,0,2000px));
 		opacity: 0;
 	}
 }
@@ -60,13 +60,25 @@ section.bg{
 		.transform-style(preserve-3d);
 		.transform-origin(center center);
 		.perspective(1000px);
-		img{
-			width: 500px;
-			left: 50%;
-			margin-left: -250px;
+
+		.character-group{
+			.transform-style(preserve-3d);
 			position: absolute;
-			top: 35%;
-			.animation(translateThree 2s linear);
+			width: 100%;
+			height: 100%;
+			top: 0;
+			opacity: 0;
+			// .transform-style(preserve-3d);
+			// .transform-origin(center center); 
+			// .perspective(1000px);
+			img{
+				width: 400px;
+				left: 50%;
+				margin-left: -250px;
+				position: absolute;
+				top: 20%;
+				//opacity: 0;
+			}
 		}
 	}
 }
@@ -74,6 +86,7 @@ section.bg{
 .loading{
 	font-size: 20px;
 	color: #000;
+	//.transition(color s ease-in-out);
 	display: none;
 	//opacity: 0;
 	position: absolute;
@@ -86,6 +99,13 @@ section.bg{
 	// &.active{
 	// 	opacity: 1;
 	// }
+	&.black{
+		color: #000;
+	}
+	&.white{
+		color: #fff;
+	}
+
 }
 
 .load-contents{
@@ -94,18 +114,124 @@ section.bg{
 		opacity: 1;
 		.index{
 			&.active{
-				
-				img{
-					&.img1{
-						left: 50%;
+				.character-group.cg1{
+					.animation(translateThree 1.5s linear);
+					//opacity: 1;
+					img{
+						&.c1{
+							left: 10%;
+							.transform(translate3d(0,0,-1000px));
+						}
+						&.c2{
+							left: 19%;
+							width: 250px;
+							opacity: 0.5;
+							//.animation-delay(2.1s);
+							.transform(translate3d(0,0,-3000px));
+						}
+						&.c3{
+							left: 50%;
+							top: 5%;
+							.transform(translate3d(0,0,-2500px));
+							//.animation-delay(4.2s);
+						}
+						&.c4{
+							left: 73%;
+							top: 44%;
+							width: 210px;
+							.transform(translate3d(0,0,-1800px));
+						}
+						&.c5{
+							left: 80%;
+							top: 0%;
+							width: 250px;
+							opacity: 0.5;
+							.transform(translate3d(400px,0,-3000px));
+						}
+						&.c6{
+							left: 100%;
+							.transform(translate3d(0,0,-1000px));
+						}
 					}
-					&.img2{
-						left: 40%;
-						.animation-delay(2.1s);
+				}
+				.character-group.cg2{
+					.animation(translateThree 2s linear);
+					.animation-delay(2.5s);
+					img{
+						&.c1{
+							left: 10%;
+							.transform(translate3d(0,0,-1000px));
+						}
+						&.c2{
+							left: 19%;
+							width: 250px;
+							opacity: 0.5;
+							//.animation-delay(2.1s);
+							.transform(translate3d(0,0,-3000px));
+						}
+						&.c3{
+							left: 50%;
+							top: 5%;
+							.transform(translate3d(0,0,-2500px));
+							//.animation-delay(4.2s);
+						}
+						&.c4{
+							left: 73%;
+							top: 44%;
+							width: 210px;
+							.transform(translate3d(0,0,-1800px));
+						}
+						&.c5{
+							left: 80%;
+							top: 0%;
+							width: 250px;
+							opacity: 0.5;
+							.transform(translate3d(400px,0,-3000px));
+						}
+						&.c6{
+							left: 100%;
+							.transform(translate3d(0,0,-1000px));
+						}
 					}
-					&.img3{
-						left: 60%;
-						.animation-delay(4.2s);
+				}
+				.character-group.cg3{
+					.animation(translateThree 2s linear);
+					.animation-delay(5s);
+					img{
+						&.c1{
+							left: 10%;
+							.transform(translate3d(0,0,-1000px));
+						}
+						&.c2{
+							left: 19%;
+							width: 250px;
+							opacity: 0.5;
+							//.animation-delay(2.1s);
+							.transform(translate3d(0,0,-3000px));
+						}
+						&.c3{
+							left: 50%;
+							top: 5%;
+							.transform(translate3d(0,0,-2500px));
+							//.animation-delay(4.2s);
+						}
+						&.c4{
+							left: 73%;
+							top: 44%;
+							width: 210px;
+							.transform(translate3d(0,0,-1800px));
+						}
+						&.c5{
+							left: 80%;
+							top: 0%;
+							width: 250px;
+							opacity: 0.5;
+							.transform(translate3d(400px,0,-3000px));
+						}
+						&.c6{
+							left: 100%;
+							.transform(translate3d(0,0,-1000px));
+						}
 					}
 				}
 			}

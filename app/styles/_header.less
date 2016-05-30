@@ -4,6 +4,7 @@ header{
 	ul.list{
 		float: right;
 		list-style: none;
+		margin-top: 15px;
 		li{
 			display: block;
 			float: left;
@@ -15,6 +16,38 @@ header{
 					text-decoration: none;
 				}
 			}
+		}
+	}
+	.logo{
+		float: left;
+		img{
+			width: 80px;
+			margin-top: 20px;
+			display: none;
+		}
+	}
+
+	&.black{
+		//字为黑色
+		.logo{
+			img.logo_black{
+				display: block;
+			}
+		}
+		ul.list li a{
+			color: #000;
+		}
+	}
+	
+	&.white{
+		//字为白色
+		.logo{
+			img.logo_white{
+				display: block;
+			}
+		}
+		ul.list li a{
+			color: #fff;
 		}
 	}
 }

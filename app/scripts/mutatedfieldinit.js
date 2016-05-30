@@ -60,8 +60,8 @@
       });
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       //console.log(window.innerWidth, window.innerHeight);
-      //设置场景颜色
-      this.renderer.setClearColor(0xffffff, 1);
+      //设置场景颜色(透明颜色用 setClearColor(0x000000, 0))
+      this.renderer.setClearColor(0xf4f4f4, 1);
       this.container = document.createElement('div');
       this.container.id = 'canvasGL';
       this.container.appendChild(this.renderer.domElement);
@@ -69,9 +69,10 @@
       document.getElementById('experience').appendChild(this.container);
       this.terrain = new Terrain(this.scene);
       //场景的灯光
-      var ambientLight = new THREE.AmbientLight( 0xffffff);
-      this.scene.add( ambientLight );
+      this.ambientLight = new THREE.AmbientLight( 0xf4f4f4);
+      this.scene.add( this.ambientLight );
       this.scene.add(this.terrain.plane_mesh);
+      console.log('init');
       return this.update();
     };
 
@@ -91,6 +92,15 @@
       return this.renderer.setSize(stageWidth, stageHeight);
     };
 
+    App.prototype.setBgcolor = function(color){
+      bgcolor = new THREE.Color(color);
+      this.renderer.setClearColor(bgcolor, 1);
+      this.ambientLight.color = bgcolor;
+      //this.renderer.setClearColor(0x000000, 1);
+      console.log('sbc');
+      return this.update();
+    };
+
     App.prototype.movecamera = function(){
       //相机目标坐标
        var desX = 0,
@@ -106,7 +116,7 @@
         requestAnimationFrame(movecamera);
         this.camera.position.y -= pace;
       }
-    }
+    };
 
     return App;
 
@@ -130,7 +140,7 @@
       sombrero_frequency: 10.0,
       speed: 0.4,
       segments: 324,
-      wireframe_color: '#000000',
+      wireframe_color: '#ffffff',
       perlin_passes: 1,
       wireframe: true,
       floor_visible: true//groundMaterial.visible 地面颜色
@@ -324,10 +334,25 @@
        }
     };
 
+    Terrain.prototype.rotateX180reverseMoveTop = function(argument){
+        //console.log(this.plane_mesh.rotation.x);
+        console.log('rrmt');
+       if (Math.abs(-this.plane_mesh.rotation.x + 0.5*Math.PI - 0.23  ) > 0.01) {
+          this.plane_mesh.rotation.x += 0.01;
+          this.plane_mesh.position.y += 0.016;
+          requestAnimationFrame(this.rotateX180reverseMoveTop.bind(this));
+       }
+    };
 
 
     Terrain.prototype.rotateXStop = function(){
       //this.plane_mesh.rotation.x = 0;
+    };
+
+    Terrain.prototype.changeWireframeColor = function(color){
+      console.log(color);
+      var lineColor = new THREE.Color(color);
+      this.uniforms.line_color.value = lineColor;
     };
 
     return Terrain;
