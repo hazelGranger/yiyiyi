@@ -2,7 +2,7 @@
   var App,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  var rotateXAction = false;
+  var Color = net.brehaut.Color;
 
   window.App = (function() {
     App.prototype.canvasGL = null;
@@ -92,13 +92,37 @@
       return this.renderer.setSize(stageWidth, stageHeight);
     };
 
-    App.prototype.setBgcolor = function(color){
-      bgcolor = new THREE.Color(color);
-      this.renderer.setClearColor(bgcolor, 1);
-      this.ambientLight.color = bgcolor;
-      //this.renderer.setClearColor(0x000000, 1);
-      console.log('sbc');
-      return this.update();
+    // App.prototype.setBgcolor = function(color){
+    //   bgcolor = new THREE.Color(color);
+    //   this.renderer.setClearColor(bgcolor, 1);
+    //   this.ambientLight.color = bgcolor;
+    //   //this.renderer.setClearColor(0x000000, 1);
+    //   console.log('sbc');
+    //   return this.update();
+    // };
+    var ratiod =0;
+    var ratiol =0;
+    var lightcolor = "#f4f4f4";
+    var darkcolor = "#000000"
+    App.prototype.bgDarker = function(){
+      ratiod += 0.01;
+      lightcolor = Color(lightcolor).darkenByAmount( 0.01 ).toString();
+      this.renderer.setClearColor(lightcolor, 1);
+      this.ambientLight.color = new THREE.Color(lightcolor);
+      console.log(lightcolor);
+      if (Math.abs(ratiod - 1) > 0.01) {
+         requestAnimationFrame(this.bgDarker.bind(this));
+      }
+    };
+    App.prototype.bglighter = function(){
+       ratiol  += 0.01;
+       darkcolor = Color(darkcolor).lightenByAmount( 0.01 ).toString();
+       this.renderer.setClearColor(darkcolor,1);
+       this.ambientLight.color = new THREE.Color(darkcolor);
+       console.log(darkcolor);
+       if (Math.abs(ratiol - 1) > 0.01) {
+          requestAnimationFrame(this.bglighter.bind(this));
+       }
     };
 
     App.prototype.movecamera = function(){

@@ -160,9 +160,9 @@ $(function(){
 		$("header").removeClass("black").addClass("white");
 		$(".loading").removeClass("black").addClass("white");
 		pageStates.loading = true;
-		App.setBgcolor('#000000');
+		App.bgDarker();
 		App.terrain.rotateX180reverseMoveTop();
-		App.terrain.changeWireframeColor('#ffffff');
+		//App.terrain.changeWireframeColor('#ffffff');
 		console.log('wi');
 		$.get(loadingSettings.works.dom,function(data){
 			$('.load-contents').html(data);
