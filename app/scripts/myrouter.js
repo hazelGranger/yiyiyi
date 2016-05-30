@@ -24,7 +24,6 @@ $(function(){
 			scripts: ["/scripts/asynchronous/scripts1.js","/scripts/asynchronous/scripts2.js"],
 			dom: "/contents/main.html"
 		}
-
 	}
 
 	var pageStates ={
@@ -35,7 +34,10 @@ $(function(){
 		//console.log('works');
 		//rotateXAction =true;
 		//App.terrain.rotateX180();
+		App.changeBg();
 		App.terrain.rotateX180reverse();
+		
+		//App.movecamera();
 
 	}).route('about/',function(){
 

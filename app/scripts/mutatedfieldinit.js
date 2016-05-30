@@ -69,8 +69,8 @@
       document.getElementById('experience').appendChild(this.container);
       this.terrain = new Terrain(this.scene);
       //场景的灯光
-      var ambientLight = new THREE.AmbientLight( 0xffffff);
-      this.scene.add( ambientLight );
+      this.ambientLight = new THREE.AmbientLight( 0xffffff);
+      this.scene.add( this.ambientLight );
       this.scene.add(this.terrain.plane_mesh);
       return this.update();
     };
@@ -90,6 +90,23 @@
       this.camera.updateProjectionMatrix();
       return this.renderer.setSize(stageWidth, stageHeight);
     };
+    var darkratio = 0;
+    var initcolor = "#ffffff";
+
+    App.prototype.changeBg = function(){
+
+      var Color = net.brehaut.Color;
+      darkratio +=0.01;
+      initcolor = Color(initcolor).darkenByAmount( 0.01 ).toString();
+      //console.log(initcolor);
+     
+      this.renderer.setClearColor(initcolor, 1);
+      this.ambientLight.color = new THREE.Color(initcolor);
+      console.log(initcolor);
+      if (Math.abs(darkratio - 1) > 0.01) {
+         requestAnimationFrame(this.changeBg.bind(this));
+      }
+    }
 
     App.prototype.movecamera = function(){
       //相机目标坐标
@@ -103,7 +120,7 @@
       var pace = 0.05;
 
       if (judgeY >0.05){
-        requestAnimationFrame(movecamera);
+        requestAnimationFrame(this.movecamera.bind(this));
         this.camera.position.y -= pace;
       }
     }
@@ -320,6 +337,7 @@
         //console.log(this.plane_mesh.rotation.x);
        if (Math.abs(-this.plane_mesh.rotation.x + 0.5*Math.PI -0.4 ) > 0.01) {
           this.plane_mesh.rotation.x += 0.01;
+          //console.log('rotateX180reverse');
           requestAnimationFrame(this.rotateX180reverse.bind(this));
        }
     };
