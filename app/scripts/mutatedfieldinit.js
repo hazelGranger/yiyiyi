@@ -378,7 +378,7 @@
     };
 
     Terrain.prototype.reset10 = function(argument){
-      if (this.plane_mesh.rotation.x > -0.5*Math.PI + 0.23  && this.plane_mesh.position.y >0) {
+      if (Math.abs(this.plane_mesh.rotation.x > -0.5*Math.PI + 0.23  && this.plane_mesh.position.y >0) {
           this.plane_mesh.rotation.x -= 0.01;
           this.plane_mesh.position.y -= 0.016;
           requestAnimationFrame(this.reset10.bind(this));
