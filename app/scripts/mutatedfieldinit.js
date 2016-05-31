@@ -103,25 +103,33 @@
     var ratiod =0;
     var ratiol =0;
     var lightcolor = "#f4f4f4";
-    var darkcolor = "#000000"
+    var darkcolor = "#000000";
     App.prototype.bgDarker = function(){
       ratiod += 0.01;
       lightcolor = Color(lightcolor).darkenByAmount( 0.01 ).toString();
       this.renderer.setClearColor(lightcolor, 1);
       this.ambientLight.color = new THREE.Color(lightcolor);
-      console.log(lightcolor);
+      //console.log(lightcolor);
       if (Math.abs(ratiod - 1) > 0.01) {
+        console.log(ratiod, lightcolor);
          requestAnimationFrame(this.bgDarker.bind(this));
+      }else{
+        ratiod = 0;
+        lightcolor = "#f4f4f4";
       }
     };
-    App.prototype.bglighter = function(){
+    App.prototype.bgLighter = function(){
        ratiol  += 0.01;
        darkcolor = Color(darkcolor).lightenByAmount( 0.01 ).toString();
        this.renderer.setClearColor(darkcolor,1);
        this.ambientLight.color = new THREE.Color(darkcolor);
-       console.log(darkcolor);
-       if (Math.abs(ratiol - 1) > 0.01) {
-          requestAnimationFrame(this.bglighter.bind(this));
+       //console.log(darkcolor);
+       if (Math.abs(ratiol - 0.81) > 0.005) {
+          console.log(ratiol, darkcolor);
+          requestAnimationFrame(this.bgLighter.bind(this));
+       }else{
+          ratiol = 0;
+          darkcolor = "#000000";
        }
     };
 
@@ -360,12 +368,21 @@
 
     Terrain.prototype.rotateX180reverseMoveTop = function(argument){
         //console.log(this.plane_mesh.rotation.x);
-        console.log('rrmt');
-       if (Math.abs(-this.plane_mesh.rotation.x + 0.5*Math.PI - 0.23  ) > 0.01) {
+        //console.log('rrmt');
+        //此处y加了 加到了5;
+       if (Math.abs(-this.plane_mesh.rotation.x + 0.5*Math.PI - 0.23  ) > 0.01 && this.plane_mesh.position.y <5) {
           this.plane_mesh.rotation.x += 0.01;
           this.plane_mesh.position.y += 0.016;
           requestAnimationFrame(this.rotateX180reverseMoveTop.bind(this));
        }
+    };
+
+    Terrain.prototype.reset10 = function(argument){
+      if (this.plane_mesh.rotation.x > -0.5*Math.PI + 0.23  && this.plane_mesh.position.y >0) {
+          this.plane_mesh.rotation.x -= 0.01;
+          this.plane_mesh.position.y -= 0.016;
+          requestAnimationFrame(this.reset10.bind(this));
+      }
     };
 
 
@@ -374,7 +391,7 @@
     };
 
     Terrain.prototype.changeWireframeColor = function(color){
-      console.log(color);
+      //console.log(color);
       var lineColor = new THREE.Color(color);
       this.uniforms.line_color.value = lineColor;
     };

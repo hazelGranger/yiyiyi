@@ -29,10 +29,20 @@ $(function(){
 
 	var pageStates = {
 		loading:  false,
-		animation: false
+		animation: false,
+		bg: "light",
+		terrain: 0,//0 表示初始状态，1表示翻转后，2表示平铺，3表示消失
+		desBg : "",
+		desTerrain: ""
 	}
 
-	$('body').route('works/',function(request){
+	$('body').route('index/',function(){
+
+		removeCurrentContents();
+		loading();
+		mainInit(loadingComplete(mainAnimation));
+
+	}).route('works/',function(request){
 		//console.log('works');
 		//rotateXAction =true;
 		//App.terrain.rotateX180();
@@ -69,6 +79,7 @@ $(function(){
 				}
 			}else{
 				//index page
+				console.log('index');
 				removeCurrentContents();
 				loading();
 				mainInit(loadingComplete(mainAnimation));
@@ -126,14 +137,73 @@ $(function(){
 		
 	}
 
+	var setStates = function(bg,terrain){
+		pageStates.bg = bg;
+		pageStates.terrain = terrain;
+	}
+
+	var setDesStates = function(desBg,desTerrain){
+		pageStates.desBg = desBg;
+		pageStates.desTerrain = desTerrain;
+	}
+
+	var bgTransition = function(){
+		console.log(pageStates.bg,pageStates.desBg);
+		if(pageStates.bg != pageStates.desBg){
+			if (pageStates.bg == "light") {
+				App.bgDarker();
+			}else if (pageStates.bg == "dark"){
+				App.bgLighter();
+				console.log('light');
+			}
+		}
+	}
+
+	var terrainTransitionBack = function(){
+		console.log(pageStates.terrain,pageStates.desTerrain);
+		if (pageStates.terrain != pageStates.desTerrain) {
+
+			if (pageStates.terrain == 0) {
+				console.log('b0');
+			}else if (pageStates.terrain == 1) {
+				console.log('b1');
+				App.terrain.reset10();
+			}else{
+				console.log('b2');
+
+			}
+		}
+	}
+
+	var terrainTransitionTo = function(){
+
+		if (pageStates.terrain != pageStates.desTerrain) {
+			if (pageStates.desTerrain == 0) {
+				console.log('t0');
+
+			}else if (pageStates.desTerrain == 1){
+				console.log('t1');
+				App.terrain.rotateX180reverseMoveTop();
+			}else {
+				console.log('t2');
+			}
+		}
+	}
+
 	var mainInit = function(callback){
+		
 		pageStates.loading = true;
+		setDesStates("light",0);
 		$("header").removeClass("white").addClass("black");
 		$(".loading").removeClass("white").addClass("black");
+		bgTransition();
+		terrainTransitionBack();
+		terrainTransitionTo();
 		$.get(loadingSettings.index.dom,function(data){
 			$('.load-contents').html(data);
 			//loadScripts(loadingSettings.index.scripts);
 			setTimeout(callback, 1000);
+			setStates("light",0);
 			//(callback && typeof(callback) === "function") && callback();
 		});
 	}
@@ -153,29 +223,48 @@ $(function(){
 			pageStates.animation = false;
 		},false);
 		
-
 	}
 
 	var worksInit = function(callback){
 		$("header").removeClass("black").addClass("white");
 		$(".loading").removeClass("black").addClass("white");
 		pageStates.loading = true;
-		App.bgDarker();
-		App.terrain.rotateX180reverseMoveTop();
+		setDesStates("dark",1);
+		bgTransition();
+		terrainTransitionBack();
+		terrainTransitionTo();
 		//App.terrain.changeWireframeColor('#ffffff');
 		console.log('wi');
 		$.get(loadingSettings.works.dom,function(data){
 			$('.load-contents').html(data);
 			setTimeout(callback, 1000);
+			setStates("dark",1);
 		});
 
 	}
 
 	var worksAnimation = function(){
-		console.log('wa')
-		pageStates.animation = true;
+		//pageStates.animation = true;
+
 		// $('.load-contents').addClass("active");
 		// $('.content.index').addClass("active");
+	}
+
+	var aboutInit = function(callback){
+		console.log('ai');
+		$("header").removeClass("black").addClass("white");
+		$(".loading").removeClass("black").addClass("white");
+		pageStates.loading = true;
+
+
+		$.get(loadingSettings.about.dom,function(data){
+			$('.load-contents').html(data);
+			setTimeout(callback, 1000);
+		});
+	}
+
+	var aboutAnimation = function(){
+
 	}
 
 
