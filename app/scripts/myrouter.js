@@ -54,7 +54,9 @@ $(function(){
 	}).route('about/',function(){
 
 		//console.log('about');
-		App.terrain.rotateXStop();
+		removeCurrentContents();
+		loading();
+		aboutInit(loadingComplete(aboutAnimation));
 
 	}).route('contact/',function(){
 		
@@ -179,14 +181,51 @@ $(function(){
 
 		if (pageStates.terrain != pageStates.desTerrain) {
 			if (pageStates.desTerrain == 0) {
+				//index首页
 				console.log('t0');
 
 			}else if (pageStates.desTerrain == 1){
+				//works 页
 				console.log('t1');
 				App.terrain.rotateX180reverseMoveTop();
-			}else {
+			}else if (pageStates.desTerrain == 2){
+				//about 页
 				console.log('t2');
+				App.terrain.rotateX();
 			}
+		}
+	}
+
+	var terrainTransition =  function(){
+
+		console.log(pageStates.terrain,pageStates.desTerrain,"tts");
+
+		switch (pageStates.terrain) {
+			case 0: 
+				if (pageStates.desTerrain == 1) {
+
+					App.terrain.rotateX180reverseMoveTop();
+
+				}else if (pageStates.desTerrain == 2) {
+
+					App.terrain.rotateX90();
+				}
+				break;
+			case 1:
+				if (pageStates.desTerrain == 0) {
+					App.terrain.reset10();
+				}else if(pageStates.desTerrain == 2){
+					console.log('12');
+					App.terrain.t12();
+				}
+				break;
+			case 2:
+				if (pageStates.desTerrain == 0) {
+					App.terrain.reset20();
+				}else if (pageStates.desTerrain == 1){
+					App.terrain.t21();
+				}
+				break;
 		}
 	}
 
@@ -197,8 +236,9 @@ $(function(){
 		$("header").removeClass("white").addClass("black");
 		$(".loading").removeClass("white").addClass("black");
 		bgTransition();
-		terrainTransitionBack();
-		terrainTransitionTo();
+		//terrainTransitionBack();
+		//terrainTransitionTo();
+		terrainTransition();
 		$.get(loadingSettings.index.dom,function(data){
 			$('.load-contents').html(data);
 			//loadScripts(loadingSettings.index.scripts);
@@ -209,7 +249,7 @@ $(function(){
 	}
 
 	var mainAnimation = function(){
-		pageStates.animation = true;
+		//pageStates.animation = true;
 		$('.load-contents').addClass("active");
 		$('.content.index').addClass("active");
 		// $('.content.index').one('animationend',function(){
@@ -218,10 +258,10 @@ $(function(){
 		var triggerElmt =  $('.content.index').find(".character-group").last().get(0);
 
 		//元素 display none时不会触发
-		triggerElmt.addEventListener('animationend', function(){
-			console.log('animationend');
-			pageStates.animation = false;
-		},false);
+		// triggerElmt.addEventListener('animationend', function(){
+		// 	console.log('animationend');
+		// 	pageStates.animation = false;
+		// },false);
 		
 	}
 
@@ -231,16 +271,16 @@ $(function(){
 		pageStates.loading = true;
 		setDesStates("dark",1);
 		bgTransition();
-		terrainTransitionBack();
-		terrainTransitionTo();
+		// terrainTransitionBack();
+		// terrainTransitionTo();
 		//App.terrain.changeWireframeColor('#ffffff');
+		terrainTransition();
 		console.log('wi');
 		$.get(loadingSettings.works.dom,function(data){
 			$('.load-contents').html(data);
 			setTimeout(callback, 1000);
 			setStates("dark",1);
 		});
-
 	}
 
 	var worksAnimation = function(){
@@ -255,11 +295,14 @@ $(function(){
 		$("header").removeClass("black").addClass("white");
 		$(".loading").removeClass("black").addClass("white");
 		pageStates.loading = true;
-
+		setDesStates("dark",2);
+		bgTransition();
+		terrainTransition();
 
 		$.get(loadingSettings.about.dom,function(data){
 			$('.load-contents').html(data);
 			setTimeout(callback, 1000);
+			setStates("dark",2);
 		});
 	}
 

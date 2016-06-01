@@ -102,7 +102,7 @@
     // };
     var ratiod =0;
     var ratiol =0;
-    var lightcolor = "#f4f4f4";
+    var lightcolor = "#f3f3f3";
     var darkcolor = "#000000";
     App.prototype.bgDarker = function(){
       ratiod += 0.01;
@@ -111,11 +111,11 @@
       this.ambientLight.color = new THREE.Color(lightcolor);
       //console.log(lightcolor);
       if (Math.abs(ratiod - 1) > 0.01) {
-        console.log(ratiod, lightcolor);
+        //console.log(ratiod, lightcolor);
          requestAnimationFrame(this.bgDarker.bind(this));
       }else{
         ratiod = 0;
-        lightcolor = "#f4f4f4";
+        lightcolor = "#f3f3f3";
       }
     };
     App.prototype.bgLighter = function(){
@@ -125,7 +125,7 @@
        this.ambientLight.color = new THREE.Color(darkcolor);
        //console.log(darkcolor);
        if (Math.abs(ratiol - 0.81) > 0.005) {
-          console.log(ratiol, darkcolor);
+          //console.log(ratiol, darkcolor);
           requestAnimationFrame(this.bgLighter.bind(this));
        }else{
           ratiol = 0;
@@ -343,14 +343,14 @@
       
     };
 
-    Terrain.prototype.rotateX360 = function(argument){
+    Terrain.prototype.rotateX360 = function(){
        if (Math.abs(this.plane_mesh.rotation.x + 2.5*Math.PI) > 0.01) {
           this.plane_mesh.rotation.x -= 0.01;
           requestAnimationFrame(this.rotateX360.bind(this));
        }
     };
 
-    Terrain.prototype.rotateX180 = function(argument){
+    Terrain.prototype.rotateX180 = function(){
         //console.log(this.plane_mesh.rotation.x);
        if (Math.abs(this.plane_mesh.rotation.x + 1.5*Math.PI + 0.4) > 0.01) {
           this.plane_mesh.rotation.x -= 0.01;
@@ -358,7 +358,7 @@
        }
     };
 
-    Terrain.prototype.rotateX180reverse = function(argument){
+    Terrain.prototype.rotateX180reverse = function(){
         //console.log(this.plane_mesh.rotation.x);
        if (Math.abs(-this.plane_mesh.rotation.x + 0.5*Math.PI -0.4 ) > 0.01) {
           this.plane_mesh.rotation.x += 0.01;
@@ -366,22 +366,60 @@
        }
     };
 
-    Terrain.prototype.rotateX180reverseMoveTop = function(argument){
+    Terrain.prototype.rotateX180reverseMoveTop = function(){
         //console.log(this.plane_mesh.rotation.x);
         //console.log('rrmt');
         //此处y加了 加到了5;
+        
        if (Math.abs(-this.plane_mesh.rotation.x + 0.5*Math.PI - 0.23  ) > 0.01 && this.plane_mesh.position.y <5) {
           this.plane_mesh.rotation.x += 0.01;
           this.plane_mesh.position.y += 0.016;
+          //console.log(this.plane_mesh.rotation.x,this.plane_mesh.rotation.y,"01");
           requestAnimationFrame(this.rotateX180reverseMoveTop.bind(this));
        }
     };
 
-    Terrain.prototype.reset10 = function(argument){
-      if (Math.abs(this.plane_mesh.rotation.x > -0.5*Math.PI + 0.23  && this.plane_mesh.position.y >0) {
+    Terrain.prototype.reset10 = function(){
+      
+      if (this.plane_mesh.rotation.x > -0.5*Math.PI  && this.plane_mesh.position.y >0) {
           this.plane_mesh.rotation.x -= 0.01;
-          this.plane_mesh.position.y -= 0.016;
+          this.plane_mesh.position.y -= 0.013;
+          //console.log(this.plane_mesh.rotation.x,this.plane_mesh.rotation.y,"10");
           requestAnimationFrame(this.reset10.bind(this));
+      }
+    };
+
+    Terrain.prototype.rotateX90 = function() {
+      // body...
+      if (this.plane_mesh.rotation.x < 0) {
+        this.plane_mesh.rotation.x += 0.01;
+        console.log(this.plane_mesh.rotation.x);
+        requestAnimationFrame(this.rotateX90.bind(this));
+      }
+
+    };
+
+    Terrain.prototype.reset20 = function() {
+      if (this.plane_mesh.rotation.x > -0.5*Math.PI) {
+        this.plane_mesh.rotation.x -= 0.01;
+        requestAnimationFrame(this.reset20.bind(this));
+      }
+    };
+
+    Terrain.prototype.t12 = function(){
+      console.log(this.plane_mesh.position.y);
+      if (this.plane_mesh.rotation.x > 0) {
+        this.plane_mesh.rotation.x -= 0.01;
+        this.plane_mesh.position.y =0;
+        requestAnimationFrame(this.t12.bind(this));
+      }
+    };
+
+    Terrain.prototype.t21 = function(){
+       if (this.plane_mesh.rotation.x < 0) {
+        this.plane_mesh.rotation.x += 0.01;
+        this.plane_mesh.position.y =5;
+        requestAnimationFrame(this.t21.bind(this));
       }
     };
 
