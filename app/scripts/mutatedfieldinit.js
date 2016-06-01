@@ -381,11 +381,13 @@
 
     Terrain.prototype.reset10 = function(){
       
-      if (this.plane_mesh.rotation.x > -0.5*Math.PI  && this.plane_mesh.position.y >0) {
+      if (this.plane_mesh.rotation.x > -0.5*Math.PI  && this.plane_mesh.position.y >-0.5) {
           this.plane_mesh.rotation.x -= 0.01;
-          this.plane_mesh.position.y -= 0.013;
+          this.plane_mesh.position.y -= 0.016;
           //console.log(this.plane_mesh.rotation.x,this.plane_mesh.rotation.y,"10");
           requestAnimationFrame(this.reset10.bind(this));
+      }else{
+          
       }
     };
 
@@ -410,7 +412,7 @@
       console.log(this.plane_mesh.position.y);
       if (this.plane_mesh.rotation.x > 0) {
         this.plane_mesh.rotation.x -= 0.01;
-        this.plane_mesh.position.y =0;
+        this.plane_mesh.position.y = -0.5;
         requestAnimationFrame(this.t12.bind(this));
       }
     };

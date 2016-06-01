@@ -161,40 +161,6 @@ $(function(){
 		}
 	}
 
-	var terrainTransitionBack = function(){
-		console.log(pageStates.terrain,pageStates.desTerrain);
-		if (pageStates.terrain != pageStates.desTerrain) {
-
-			if (pageStates.terrain == 0) {
-				console.log('b0');
-			}else if (pageStates.terrain == 1) {
-				console.log('b1');
-				App.terrain.reset10();
-			}else{
-				console.log('b2');
-
-			}
-		}
-	}
-
-	var terrainTransitionTo = function(){
-
-		if (pageStates.terrain != pageStates.desTerrain) {
-			if (pageStates.desTerrain == 0) {
-				//index首页
-				console.log('t0');
-
-			}else if (pageStates.desTerrain == 1){
-				//works 页
-				console.log('t1');
-				App.terrain.rotateX180reverseMoveTop();
-			}else if (pageStates.desTerrain == 2){
-				//about 页
-				console.log('t2');
-				App.terrain.rotateX();
-			}
-		}
-	}
 
 	var terrainTransition =  function(){
 
@@ -235,14 +201,16 @@ $(function(){
 		setDesStates("light",0);
 		$("header").removeClass("white").addClass("black");
 		$(".loading").removeClass("white").addClass("black");
-		bgTransition();
+		//bgTransition();
 		//terrainTransitionBack();
 		//terrainTransitionTo();
-		terrainTransition();
+		//terrainTransition(callback);
 		$.get(loadingSettings.index.dom,function(data){
 			$('.load-contents').html(data);
+			bgTransition();
+			terrainTransition(callback);
 			//loadScripts(loadingSettings.index.scripts);
-			setTimeout(callback, 1000);
+			//setTimeout(callback, 1000);
 			setStates("light",0);
 			//(callback && typeof(callback) === "function") && callback();
 		});
