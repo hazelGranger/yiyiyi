@@ -387,7 +387,7 @@
           //console.log(this.plane_mesh.rotation.x,this.plane_mesh.rotation.y,"10");
           requestAnimationFrame(this.reset10.bind(this));
       }else{
-          
+        $('.load-contents').trigger("terrainAnimation");
       }
     };
 

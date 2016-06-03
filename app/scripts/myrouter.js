@@ -127,6 +127,16 @@ $(function(){
 				pageStates.loading = false;
 				console.log('lc1');
 			}, 1500);
+			if (pageStates.animation == true ) {
+
+				$('.load-contents').one("terrainAnimation",function (argument) {
+					console.log('trabm');
+					pageStates.animation = false;
+				});
+
+				//$('.').one();
+
+			}
 
 			// setTimeout(function(){
 			// 	console.log('123')
@@ -163,6 +173,8 @@ $(function(){
 
 
 	var terrainTransition =  function(){
+
+		pageStates.animation = true;
 
 		console.log(pageStates.terrain,pageStates.desTerrain,"tts");
 
@@ -208,11 +220,11 @@ $(function(){
 		$.get(loadingSettings.index.dom,function(data){
 			$('.load-contents').html(data);
 			bgTransition();
-			terrainTransition(callback);
+			terrainTransition();
 			//loadScripts(loadingSettings.index.scripts);
 			//setTimeout(callback, 1000);
 			setStates("light",0);
-			//(callback && typeof(callback) === "function") && callback();
+			(callback && typeof(callback) === "function") && callback();
 		});
 	}
 
@@ -293,5 +305,6 @@ $(function(){
 	});
 
 	$(window).load(routerResolve);
+
 
 });
