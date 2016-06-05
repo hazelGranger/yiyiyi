@@ -16,7 +16,7 @@ $(function(){
 			route: "about/",
 			styles: ["/styles/page1.css"],
 			scripts: ["/scripts/asynchronous/scripts1.js"],
-			dom: "/contents/main.html"
+			dom: "/contents/about.html"
 		},
 		contact: {
 			route: "contact/",
@@ -258,7 +258,8 @@ $(function(){
 
 	var mainAnimation = function(){
 		//pageStates.animation = true;
-		$('.load-contents').addClass("active");
+		$('.bg').removeClass("flow");
+		$('.load-contents').removeClass("relative").addClass("active");
 		$('.content.index').addClass("active");
 		// $('.content.index').one('animationend',function(){
 		// 	console.log('animationend');
@@ -290,9 +291,9 @@ $(function(){
 
 	var worksAnimation = function(){
 		//pageStates.animation = true;
-
-		// $('.load-contents').addClass("active");
-		// $('.content.index').addClass("active");
+		$('.bg').addClass("flow");
+		$('.load-contents').addClass("active").addClass("relative");
+		$('.content.works').addClass("active");
 
 		console.log(pageStates.loading,pageStates.animation);
 	}
@@ -300,10 +301,10 @@ $(function(){
 	var aboutInit = function(){
 		pageStates.loading = true;
 		console.log('ai');
-		$("header").removeClass("black").addClass("white");
-		$(".loading").removeClass("black").addClass("white");
+		$("header").removeClass("white").addClass("black");
+		$(".loading").removeClass("white").addClass("black");
 		
-		setDesStates("dark",2);
+		setDesStates("light",2);
 		bgTransition();
 		terrainTransition();
 
@@ -313,12 +314,17 @@ $(function(){
 	}
 
 	var aboutAnimation = function(){
+		$('.bg').addClass("flow");
+		$('.load-contents').addClass("active").addClass("relative");
+		$('.content.about').addClass("active");
+
 
 	}
 
 
 	var removeCurrentContents = function(){
-		$('.load-contents').empty();
+		$('.load-contents').empty().removeClass("active");
+
 	}
 
 	$(window).bind('hashchange',function(e,triggered){
