@@ -40,7 +40,10 @@ $(function(){
 
 		removeCurrentContents();
 		loading();
-		mainInit(loadingComplete(mainAnimation));
+		//mainInit(loadingComplete(mainAnimation));
+		console.log('index#');
+		mainInit();
+		loadingComplete(mainAnimation);
 
 	}).route('works/',function(request){
 		//console.log('works');
@@ -49,14 +52,17 @@ $(function(){
 		//App.terrain.rotateX180reverse();
 		removeCurrentContents();
 		loading();
-		worksInit(loadingComplete(worksAnimation));
+		//worksInit(loadingComplete(worksAnimation));
+		worksInit();
+		loadingComplete(worksAnimation);
 
 	}).route('about/',function(){
 
 		//console.log('about');
 		removeCurrentContents();
 		loading();
-		aboutInit(loadingComplete(aboutAnimation));
+		aboutInit();
+		loadingComplete(aboutAnimation);
 
 	}).route('contact/',function(){
 		
@@ -71,8 +77,8 @@ $(function(){
 
 	var routerResolve = function(){
 		var hash = location.hash.replace(/^#/, '');
-		console.log(pageStates.loading,pageStates.animation);
-		if (!pageStates.loading && !pageStates.animation) {
+		console.log(pageStates.loading,pageStates.animation,"rr");
+		if (!pageStates.loading) {
 			if (hash) {
 				//other pages with # in router
 				var match = $.routeMatches(hash);
@@ -84,7 +90,8 @@ $(function(){
 				console.log('index');
 				removeCurrentContents();
 				loading();
-				mainInit(loadingComplete(mainAnimation));
+				mainInit();
+				setTimeout(loadingComplete(mainAnimation),1000);
 
 			}
 		}
@@ -122,20 +129,28 @@ $(function(){
 
 		if (callback && typeof(callback) === "function") {
 			//console.log('lc1');
-			$('.loading').delay(500).fadeOut(1000,callback);
-			setTimeout(function(){
-				pageStates.loading = false;
-				console.log('lc1');
-			}, 1500);
+			$('.loading').delay(500).fadeOut(1000);
+			console.log(pageStates.loading,pageStates.animation,"lc");
 			if (pageStates.animation == true ) {
+
+				$('.loading').delay(500).fadeOut(1000);
+				setTimeout(function(){
+					pageStates.loading = false;
+					console.log('lc1');
+				}, 1500); 
 
 				$('.load-contents').one("terrainAnimation",function (argument) {
 					console.log('trabm');
-					pageStates.animation = false;
+					callback();
 				});
-
 				//$('.').one();
-
+			}else{
+				console.log('callback');
+				$('.loading').delay(500).fadeOut(1000,callback);
+				setTimeout(function(){
+					pageStates.loading = false;
+					console.log('lc123');
+				}, 1500);
 			}
 
 			// setTimeout(function(){
@@ -164,9 +179,11 @@ $(function(){
 		if(pageStates.bg != pageStates.desBg){
 			if (pageStates.bg == "light") {
 				App.bgDarker();
+				pageStates.bg = "dark";
+
 			}else if (pageStates.bg == "dark"){
 				App.bgLighter();
-				console.log('light');
+				pageStates.bg = "light";
 			}
 		}
 	}
@@ -174,57 +191,68 @@ $(function(){
 
 	var terrainTransition =  function(){
 
-		pageStates.animation = true;
 
 		console.log(pageStates.terrain,pageStates.desTerrain,"tts");
 
 		switch (pageStates.terrain) {
 			case 0: 
 				if (pageStates.desTerrain == 1) {
-
+					console.log('01');
+					pageStates.animation = true;
+					pageStates.terrain = 1;
 					App.terrain.rotateX180reverseMoveTop();
 
 				}else if (pageStates.desTerrain == 2) {
-
+					pageStates.animation = true;
+					pageStates.terrain = 2;
 					App.terrain.rotateX90();
 				}
 				break;
 			case 1:
 				if (pageStates.desTerrain == 0) {
+					pageStates.animation = true;
+					pageStates.terrain = 0;
 					App.terrain.reset10();
+					console.log('10');
 				}else if(pageStates.desTerrain == 2){
+					pageStates.animation = true;
+					pageStates.terrain = 2;
 					console.log('12');
 					App.terrain.t12();
 				}
 				break;
 			case 2:
 				if (pageStates.desTerrain == 0) {
+					pageStates.animation = true;
+					pageStates.terrain = 0;
 					App.terrain.reset20();
 				}else if (pageStates.desTerrain == 1){
+					pageStates.animation = true;
+					pageStates.terrain = 1;
 					App.terrain.t21();
 				}
 				break;
 		}
 	}
 
-	var mainInit = function(callback){
+	var mainInit = function(){
 		
 		pageStates.loading = true;
 		setDesStates("light",0);
 		$("header").removeClass("white").addClass("black");
 		$(".loading").removeClass("white").addClass("black");
+		bgTransition();
+		terrainTransition();
 		//bgTransition();
 		//terrainTransitionBack();
 		//terrainTransitionTo();
 		//terrainTransition(callback);
 		$.get(loadingSettings.index.dom,function(data){
 			$('.load-contents').html(data);
-			bgTransition();
-			terrainTransition();
+			console.log('mi-bg');
 			//loadScripts(loadingSettings.index.scripts);
 			//setTimeout(callback, 1000);
-			setStates("light",0);
-			(callback && typeof(callback) === "function") && callback();
+			//setTimeout(setStates("light",0),200);
 		});
 	}
 
@@ -235,7 +263,8 @@ $(function(){
 		// $('.content.index').one('animationend',function(){
 		// 	console.log('animationend');
 		// });
-		var triggerElmt =  $('.content.index').find(".character-group").last().get(0);
+		//触发 animation 动画 ，暂时不需
+		//var triggerElmt =  $('.content.index').find(".character-group").last().get(0);
 
 		//元素 display none时不会触发
 		// triggerElmt.addEventListener('animationend', function(){
@@ -245,21 +274,17 @@ $(function(){
 		
 	}
 
-	var worksInit = function(callback){
-		$("header").removeClass("black").addClass("white");
-		$(".loading").removeClass("black").addClass("white");
+	var worksInit = function(){
+		console.log('wi');
 		pageStates.loading = true;
 		setDesStates("dark",1);
+		$("header").removeClass("black").addClass("white");
+		$(".loading").removeClass("black").addClass("white");
 		bgTransition();
-		// terrainTransitionBack();
-		// terrainTransitionTo();
-		//App.terrain.changeWireframeColor('#ffffff');
 		terrainTransition();
-		console.log('wi');
+
 		$.get(loadingSettings.works.dom,function(data){
 			$('.load-contents').html(data);
-			setTimeout(callback, 1000);
-			setStates("dark",1);
 		});
 	}
 
@@ -268,21 +293,22 @@ $(function(){
 
 		// $('.load-contents').addClass("active");
 		// $('.content.index').addClass("active");
+
+		console.log(pageStates.loading,pageStates.animation);
 	}
 
-	var aboutInit = function(callback){
+	var aboutInit = function(){
+		pageStates.loading = true;
 		console.log('ai');
 		$("header").removeClass("black").addClass("white");
 		$(".loading").removeClass("black").addClass("white");
-		pageStates.loading = true;
+		
 		setDesStates("dark",2);
 		bgTransition();
 		terrainTransition();
 
 		$.get(loadingSettings.about.dom,function(data){
 			$('.load-contents').html(data);
-			setTimeout(callback, 1000);
-			setStates("dark",2);
 		});
 	}
 
@@ -303,6 +329,14 @@ $(function(){
 	$('header a').click(function(){
 		//routerResolve();
 	});
+
+	$('body').click(function(){
+		console.log(pageStates.loading,pageStates.animation);
+	});
+
+	$('.load-contents').on("animationComplete",function(){
+		pageStates.animation = false;
+	})
 
 	$(window).load(routerResolve);
 

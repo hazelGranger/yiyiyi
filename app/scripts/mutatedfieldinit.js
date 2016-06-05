@@ -376,6 +376,9 @@
           this.plane_mesh.position.y += 0.016;
           //console.log(this.plane_mesh.rotation.x,this.plane_mesh.rotation.y,"01");
           requestAnimationFrame(this.rotateX180reverseMoveTop.bind(this));
+       }else{
+          $('.load-contents').trigger("terrainAnimation");
+          $('.load-contents').trigger("animationComplete");
        }
     };
 
@@ -388,6 +391,7 @@
           requestAnimationFrame(this.reset10.bind(this));
       }else{
         $('.load-contents').trigger("terrainAnimation");
+        $('.load-contents').trigger("animationComplete");
       }
     };
 
@@ -395,8 +399,11 @@
       // body...
       if (this.plane_mesh.rotation.x < 0) {
         this.plane_mesh.rotation.x += 0.01;
-        console.log(this.plane_mesh.rotation.x);
+       // console.log(this.plane_mesh.rotation.x);
         requestAnimationFrame(this.rotateX90.bind(this));
+      }else{
+        $('.load-contents').trigger("terrainAnimation");
+        $('.load-contents').trigger("animationComplete");
       }
 
     };
@@ -405,23 +412,33 @@
       if (this.plane_mesh.rotation.x > -0.5*Math.PI) {
         this.plane_mesh.rotation.x -= 0.01;
         requestAnimationFrame(this.reset20.bind(this));
+      }else{
+        $('.load-contents').trigger("terrainAnimation");
+        $('.load-contents').trigger("animationComplete");
       }
     };
 
     Terrain.prototype.t12 = function(){
-      console.log(this.plane_mesh.position.y);
+      console.log(this.plane_mesh.position.y,this.plane_mesh.rotation.x);
       if (this.plane_mesh.rotation.x > 0) {
         this.plane_mesh.rotation.x -= 0.01;
-        this.plane_mesh.position.y = -0.5;
+        this.plane_mesh.position.y -= 0.035;
         requestAnimationFrame(this.t12.bind(this));
+      }else{
+        $('.load-contents').trigger("terrainAnimation");
+        $('.load-contents').trigger("animationComplete");
       }
     };
 
     Terrain.prototype.t21 = function(){
-       if (this.plane_mesh.rotation.x < 0) {
+      console.log('21');
+       if (Math.abs(-this.plane_mesh.rotation.x + 0.5*Math.PI - 0.23  ) > 0.01) {
         this.plane_mesh.rotation.x += 0.01;
-        this.plane_mesh.position.y =5;
+        this.plane_mesh.position.y += 0.035;
         requestAnimationFrame(this.t21.bind(this));
+      }else{
+        $('.load-contents').trigger("terrainAnimation");
+        $('.load-contents').trigger("animationComplete");
       }
     };
 
