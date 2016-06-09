@@ -4,7 +4,7 @@ $(function(){
 		index: {
 			route: "/",
 			scripts: ["/scripts/asynchronous/index.js"],
-			dom: "/contents/index.html"
+			dom: "/contents/index2.html"
 		},
 		works: {
 			route: "works/",
@@ -75,7 +75,11 @@ $(function(){
 	});
 
 
-	var routerResolve = function(){
+	var routerResolve = function(e){
+		//console.log(e.type);
+		if (!e || e.type != "load") {
+			$(".logo a").trigger("click");
+		}
 		var hash = location.hash.replace(/^#/, '');
 		console.log(pageStates.loading,pageStates.animation,"rr");
 		if (!pageStates.loading) {
@@ -197,10 +201,9 @@ $(function(){
 		switch (pageStates.terrain) {
 			case 0: 
 				if (pageStates.desTerrain == 1) {
-					console.log('01');
 					pageStates.animation = true;
 					pageStates.terrain = 1;
-					App.terrain.rotateX180reverseMoveTop();
+					App.terrain.rotateX90();
 
 				}else if (pageStates.desTerrain == 2) {
 					pageStates.animation = true;
@@ -212,13 +215,13 @@ $(function(){
 				if (pageStates.desTerrain == 0) {
 					pageStates.animation = true;
 					pageStates.terrain = 0;
-					App.terrain.reset10();
+					App.terrain.reset20();
 					console.log('10');
 				}else if(pageStates.desTerrain == 2){
 					pageStates.animation = true;
 					pageStates.terrain = 2;
+					App.terrain.stay();
 					console.log('12');
-					App.terrain.t12();
 				}
 				break;
 			case 2:
@@ -226,10 +229,12 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 0;
 					App.terrain.reset20();
+					console.log('20');
+					//App.terrain.reset20();
 				}else if (pageStates.desTerrain == 1){
 					pageStates.animation = true;
 					pageStates.terrain = 1;
-					App.terrain.t21();
+					App.terrain.stay();
 				}
 				break;
 		}
@@ -341,6 +346,7 @@ $(function(){
 	});
 
 	$('.load-contents').on("animationComplete",function(){
+		console.log('animationComplete');
 		pageStates.animation = false;
 	})
 

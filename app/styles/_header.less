@@ -12,6 +12,7 @@ header{
 			margin-right: 15px;
 			a{
 				color: #000;
+				height: 80px;
 				&:hover{
 					text-decoration: none;
 				}
@@ -20,16 +21,22 @@ header{
 	}
 	.logo{
 		float: left;
+		height: 80px;
+		border-bottom-left-radius: 40px;
+		border-bottom-right-radius: 40px;
+		//padding: 5px;
 		img{
 			width: 80px;
-			margin-top: 20px;
+			margin-top: 7px;
 			display: none;
+			padding: 7px;
 		}
 	}
 
 	&.black{
 		//字为黑色
 		.logo{
+			background-color: #000;
 			img.logo_black{
 				display: block;
 			}
@@ -42,12 +49,48 @@ header{
 	&.white{
 		//字为白色
 		.logo{
+			background-color: #fff;
 			img.logo_white{
 				display: block;
 			}
 		}
 		ul.list li a{
 			color: #fff;
+		}
+	}
+
+	&.open{
+		.logo{
+			background-color: #f00;
+		}
+	}
+}
+
+.header-list{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: #000;
+	top: 0;
+	z-index: 1;
+	display: none;
+	opacity: 0;
+	ul.list{
+		list-style: none;
+		margin: auto;
+		margin-top: 200px;
+		width: 200px;
+		li{
+			line-height: 45px;
+			text-align: center;
+			a{
+				color: #fff;
+				font-size: 24px;
+				&:hover{
+					text-decoration: none;
+				}
+			}
+			
 		}
 	}
 }
