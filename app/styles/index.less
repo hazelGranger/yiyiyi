@@ -321,18 +321,23 @@ section.bg{
 				
 				//version 2
 				.vertical-text{
-					margin-top: 300px;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					margin-left: -11em;
+					margin-top: -5em;
+					font-size: 28px;
 					p{
-						width: 400px;
 						margin: auto;
 						span{
 							width: 1em;
-							margin: 0 0 0 1em;
+							margin: 0 0 0 0.6em;
 							float: right;
 							line-height: 1.2;
 							text-align: left;
 							letter-spacing: 0;
 							word-wrap: break-word;
+							//font-size: 28px;
 						}
 						&:after{
 							content: '';
@@ -354,6 +359,16 @@ section.bg{
 				p{
 					width: 120px;
 				}
+			}
+		}
+	}
+}
+
+@media(max-width: 1199px){
+	.load-contents.active{
+		.index.active{
+			.vertical-text{
+				font-size: 20px;
 			}
 		}
 	}
@@ -486,6 +501,48 @@ section.bg{
 						}
 					}
 
+				}
+
+				.horizon-text{
+					.qa-group{
+						.q{
+							&:before{
+								display: inline-block;
+								content: '问';
+								color: #f00;
+								position: absolute;
+								left: -2em;
+								opacity: 0;
+								.transition(opacity 0.5s ease-in-out);
+							}
+						}
+						.a{
+							display: none;
+							.transition(width 0.5s ease-in-out);
+							&:before{
+								display: inline-block;
+								content: '答';
+								color: #f00;
+								position: absolute;
+								left: -2em;
+								opacity: 0;
+								.transition(opacity 0.5s ease-in-out);
+							}
+						}
+						&:hover{
+							.q{
+								&:before{
+									opacity: 1;
+								}
+							}
+							.a{
+
+								&:before{
+									opacity: 1;
+								}
+							}
+						}
+					}
 				}
 
 				.end{
