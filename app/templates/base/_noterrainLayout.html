@@ -19,20 +19,20 @@
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
     <!-- endbuild -->
-    <!-- build:css(.tmp/) styles/main.css -->
+    <!-- build:css(.tmp/) styles/contact.css -->
     <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/index.css" />
     <!-- endbuild -->
     {%if pageName %}
     <!-- build:css(.tmp/) styles/{{pageName}}.css -->
     <link rel="stylesheet" href="/styles/{{pageName}}.css" />
     <!-- endbuild -->
-    <link href='http://api.youziku.com/webfont/CSS/576006d9f629ed1270d0329a' rel='stylesheet' type='text/css' />
-    <link href='http://api.youziku.com/webfont/CSS/57600841f629ed1270d0329c' rel='stylesheet' type='text/css' />
-    <link href='http://api.youziku.com/webfont/CSS/57600a7df629ed1270d0329f' rel='stylesheet' type='text/css' />
     {% endif %} 
 
     {% endblock %}
-
+    <link href='http://api.youziku.com/webfont/CSS/576006d9f629ed1270d0329a' rel='stylesheet' type='text/css' />
+    <link href='http://api.youziku.com/webfont/CSS/57600841f629ed1270d0329c' rel='stylesheet' type='text/css' />
+    <link href='http://api.youziku.com/webfont/CSS/57600a7df629ed1270d0329f' rel='stylesheet' type='text/css' />
 </head>
 <body>
 	{% block header %}
@@ -48,20 +48,10 @@
     {% endblock %}
 
     {% block scripts %}
-    <!-- build:js(.) scripts/vendors.js -->
-        
-    <!-- endbuild -->
 
-    <!-- build:js scripts/util.js -->
+
+    <!-- build:js scripts/util2.js -->
         <script src="/scripts/jquery-2.2.4.min.js"></script>
-        <script type="text/javascript" src="/scripts/cbsplit.js"></script>
-        <script type="text/javascript" src="/scripts/jquery.ba-hashchange.js"></script>
-        <script type="text/javascript" src="/scripts/jquery.router.js"></script>
-        <script src="/scripts/three.min.js"></script>
-        <script src="/scripts/dat.gui.js"></script>
-        <script src="/scripts/color.js"></script>
-        <script src="/scripts/mutatedfieldinit.js"></script>
-        <script type="text/javascript" src="/scripts/myrouter.js"></script>
         <script type="text/javascript" src="/scripts/header.js"></script>
         <script type="text/javascript" src="/scripts/charactercount.js"></script>
     <!-- endbuild -->

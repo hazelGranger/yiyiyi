@@ -61,7 +61,7 @@
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       //console.log(window.innerWidth, window.innerHeight);
       //设置场景颜色(透明颜色用 setClearColor(0x000000, 0))
-      this.renderer.setClearColor(0xf4f4f4, 1);
+      this.renderer.setClearColor(0xe0e0e0, 1);
       this.container = document.createElement('div');
       this.container.id = 'canvasGL';
       this.container.appendChild(this.renderer.domElement);
@@ -69,7 +69,7 @@
       document.getElementById('experience').appendChild(this.container);
       this.terrain = new Terrain(this.scene);
       //场景的灯光
-      this.ambientLight = new THREE.AmbientLight( 0xf4f4f4);
+      this.ambientLight = new THREE.AmbientLight( 0xe0e0e0);
       this.scene.add( this.ambientLight );
       this.scene.add(this.terrain.plane_mesh);
       console.log('init');
@@ -102,7 +102,7 @@
     // };
     var ratiod =0;
     var ratiol =0;
-    var lightcolor = "#f3f3f3";
+    var lightcolor = "#eeeeeee";
     var darkcolor = "#000000";
     App.prototype.bgDarker = function(){
       ratiod += 0.01;
@@ -115,7 +115,7 @@
          requestAnimationFrame(this.bgDarker.bind(this));
       }else{
         ratiod = 0;
-        lightcolor = "#f3f3f3";
+        lightcolor = "#eeeeee";
       }
     };
     App.prototype.bgLighter = function(){
@@ -124,7 +124,7 @@
        this.renderer.setClearColor(darkcolor,1);
        this.ambientLight.color = new THREE.Color(darkcolor);
        //console.log(darkcolor);
-       if (Math.abs(ratiol - 0.81) > 0.005) {
+       if (Math.abs(ratiol - 0.75) > 0.005) {
           //console.log(ratiol, darkcolor);
           requestAnimationFrame(this.bgLighter.bind(this));
        }else{
@@ -452,6 +452,26 @@
         $('.load-contents').trigger("animationComplete");
       }, 1000);
         
+    };
+
+    Terrain.prototype.disappear = function(argument){
+      console.log('disapr');
+      var $canvas_wrapper = $('#experience');
+      $canvas_wrapper.fadeOut(500);
+      setTimeout(function(){
+        $('.load-contents').trigger("terrainAnimation");
+        $('.load-contents').trigger("animationComplete");
+        $canvas_wrapper.remove();
+      }, 1000);
+    };
+
+    Terrain.prototype.appear = function(argument){
+      var $canvas_wrapper = $('#experience');
+      $canvas_wrapper.fadeIn(500);
+      // setTimeout(function(){
+      //   $('.load-contents').trigger("terrainAnimation");
+      //   $('.load-contents').trigger("animationComplete");
+      // }, 1000);
     };
 
 

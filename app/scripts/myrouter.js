@@ -22,7 +22,7 @@ $(function(){
 			route: "contact/",
 			styles: ["/styles/asynchronous/page1.css","/styles/asynchronous/page2.css"],
 			scripts: ["/scripts/asynchronous/scripts1.js","/scripts/asynchronous/scripts2.js"],
-			dom: "/contents/main.html"
+			dom: "/contents/contact.html"
 		}
 
 	}
@@ -66,6 +66,10 @@ $(function(){
 
 	}).route('contact/',function(){
 		
+		removeCurrentContents();
+		loading();
+		contactInit();
+		loadingComplete(contactAnimation);
 		//console.log('contact');
 		
 	}).route('/',function(){
@@ -209,6 +213,10 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 2;
 					App.terrain.rotateX90();
+				}else if(pageStates.desTerrain == 3){
+					pageStates.animation = true;
+					pageStates.terrain = 3;
+					App.terrain.disappear();
 				}
 				break;
 			case 1:
@@ -222,6 +230,10 @@ $(function(){
 					pageStates.terrain = 2;
 					App.terrain.stay();
 					console.log('12');
+				}else if(pageStates.desTerrain == 3){
+					pageStates.animation = true;
+					pageStates.terrain = 3;
+					App.terrain.disappear();
 				}
 				break;
 			case 2:
@@ -235,8 +247,23 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 1;
 					App.terrain.stay();
+				}else if(pageStates.desTerrain == 3){
+					pageStates.animation = true;
+					pageStates.terrain = 3;
+					App.terrain.disappear();
 				}
 				break;
+			case 3:
+				if (pageStates.desTerrain == 0) {
+					pageStates.animation = true;
+					pageStates.terrain = 0;
+					App.terrain.appear();
+					setTimeout(function(){
+
+					}, 600);
+				}else{
+
+				}
 		}
 	}
 
@@ -323,6 +350,27 @@ $(function(){
 		$('.load-contents').addClass("active").addClass("relative");
 		$('.content.about').addClass("active");
 
+	}
+
+	var contactInit = function(){
+		pageStates.loading = true;
+		console.log('ci');
+		$("header").removeClass("black").addClass("white");
+		$(".loading").removeClass("black").addClass("white");
+		setDesStates("dark",3);
+		bgTransition();
+		terrainTransition();
+
+		$.get(loadingSettings.contact.dom,function(data){
+			$('.load-contents').html(data);
+		});
+
+	}
+
+	var contactAnimation = function(){
+		$('.bg').removeClass("flow");
+		$('.load-contents').addClass("active").removeClass("relative");
+		$('.content.contact').addClass("active");
 
 	}
 
