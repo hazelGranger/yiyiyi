@@ -1,31 +1,47 @@
 $(document).ready(function(){
 
-	var state = {
-		headerOpen : false
-	};
+	var header ={
+		dom: $('header'),
+		list: $('.header-list'),
+		headerOpen: false,
+
+		open: function(){
+			var headerobj = this;
+			headerobj.dom.addClass("open");
+			headerobj.list.show();
+			setTimeout(function(){
+				headerobj.list.animate({"opacity" : 1},500);
+				 headerobj.headerOpen = true;
+			}, 100);
+		},
+
+		close: function(){
+			var headerobj = this;
+			headerobj.list.animate({"opacity" : 0},500);
+			setTimeout(function(){
+				headerobj.list.hide();
+				headerobj.dom.removeClass("open");
+				headerobj.headerOpen = false;
+			}, 600);
+		}
+	}
 
 	$(".logo a").click(function(){
-		var $header = $('header');
-		var $list = $('.header-list');
-		if (state.headerOpen) {
-			
-			$list.animate({"opacity" : 0},500);
-			setTimeout(function(){
-				$list.hide();
-				$header.removeClass("open");
-				state.headerOpen = false;				
-			}, 600);
-
+		if (header.headerOpen) {
+			header.close();
 		}else {
-			$header.addClass("open");
-			$list.show();
-			setTimeout(function(){
-				$list.animate({"opacity" : 1},500);
-				state.headerOpen = true;
-			}, 100);
-
+			header.open();
 		}
+	});
 
+	$('body').on("click",".header-list",function(){
+		if (header.headerOpen) {
+			header.close();
+		}
+	});
+
+	$(".header-list a").click(function(e){
+		e.stopPropagation();
 	});
 
 	
