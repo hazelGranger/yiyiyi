@@ -192,6 +192,10 @@ $(function(){
 			}else if (pageStates.bg == "dark"){
 				App.bgLighter();
 				pageStates.bg = "light";
+			}else if(pageStates.bg == "white"){
+				console.log('white');
+				App.bgWhite();
+				pageStates.bg = "white";
 			}
 		}
 	}
@@ -208,11 +212,13 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 1;
 					App.terrain.rotateX90();
+					App.terrain.changeWireframeColor('#ffffff');
 
 				}else if (pageStates.desTerrain == 2) {
 					pageStates.animation = true;
 					pageStates.terrain = 2;
 					App.terrain.rotateX90();
+					App.terrain.changeWireframeColor('#dddddd');
 				}else if(pageStates.desTerrain == 3){
 					pageStates.animation = true;
 					pageStates.terrain = 3;
@@ -224,12 +230,14 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 0;
 					App.terrain.reset20();
+					App.terrain.changeWireframeColor('#ffffff');
 					console.log('10');
 				}else if(pageStates.desTerrain == 2){
 					pageStates.animation = true;
 					pageStates.terrain = 2;
 					App.terrain.stay();
 					console.log('12');
+					App.terrain.changeWireframeColor('#dddddd');
 				}else if(pageStates.desTerrain == 3){
 					pageStates.animation = true;
 					pageStates.terrain = 3;
@@ -242,11 +250,13 @@ $(function(){
 					pageStates.terrain = 0;
 					App.terrain.reset20();
 					console.log('20');
+					App.terrain.changeWireframeColor('#ffffff');
 					//App.terrain.reset20();
 				}else if (pageStates.desTerrain == 1){
 					pageStates.animation = true;
 					pageStates.terrain = 1;
 					App.terrain.stay();
+					App.terrain.changeWireframeColor('#ffffff');
 				}else if(pageStates.desTerrain == 3){
 					pageStates.animation = true;
 					pageStates.terrain = 3;
@@ -336,7 +346,7 @@ $(function(){
 		$("header").removeClass("white").addClass("black");
 		$(".loading").removeClass("white").addClass("black");
 		
-		setDesStates("light",2);
+		setDesStates("white",2);
 		bgTransition();
 		terrainTransition();
 
