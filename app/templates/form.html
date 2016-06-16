@@ -19,11 +19,20 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="key">Name</span>
+							<input type="text" >
+						</div>
+						<div class="input-group">
+							<span class="key">Name</span>
 							<input type="text">
 						</div>
-						<div class="input-group"></div>
-						<div class="input-group"></div>
-						<div class="input-group"></div>
+						<div class="input-group">
+							<span class="key">Name</span>
+							<input type="text">
+						</div>
+						<div class="input-group">
+							<span class="key">Name</span>
+							<input type="text">
+						</div>
 					</div>
 				</div>
 				<div class="col-sm-8">
@@ -33,4 +42,11 @@
 		</div>
 	</section>
 
+{% endblock %}
+
+{% block scripts %}
+	 {% parent %}
+	 <!-- build:js scripts/formaction.js -->
+	 	<script src="/scripts/form.js"></script>
+	 <!-- endbuild -->
 {% endblock %}

@@ -351,25 +351,24 @@ section.bg{
 	}
 }
 
-@media(max-width: 767px){
-	.load-contents.active{
-		.index.active{
-			.vertical-text{
-				margin-top: -12em;
-				margin-left: -3em;
-				p{
-					//width: 120px;
-				}
-			}
-		}
-	}
-}
 
 @media(max-width: 1199px){
 	.load-contents.active{
 		.index.active{
 			.vertical-text{
 				font-size: 20px;
+			}
+		}
+	}
+}
+
+@media(max-width: 767px){
+	.load-contents.active{
+		.index.active{
+			.vertical-text{
+				margin-top: -12em;
+				margin-left: -3em;
+				font-size: 18px;
 			}
 		}
 	}
@@ -456,6 +455,7 @@ section.bg{
 					.qa-group{
 						float: right;
 						margin-left: 40px;
+						cursor: pointer;
 						p{
 							float: right;
 							position: relative;
@@ -513,6 +513,7 @@ section.bg{
 				.horizon-text{
 					.qa-group{
 						padding: 10px 0;
+						cursor: pointer;
 						.q{
 							opacity: 0.7;
 							&:before{
@@ -784,6 +785,24 @@ section.service{
 		.background-clip(text);
 		font-size: 40px;
 		font-weight: normal;
+	}
+
+	.form-group{
+		.input-group{
+			margin: 15px 0;
+			border-bottom: 1px solid #333;
+			.transition(all 0.5s ease-in-out);
+			input[type="text"]{
+				border: none;
+				outline: 0;
+				background-color: transparent;
+
+			}
+			&.active{
+				color: #fff;
+				border-bottom: 1px solid #fff;
+			}
+		}
 	}
 }
 
