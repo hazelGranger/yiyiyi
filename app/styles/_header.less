@@ -1,3 +1,4 @@
+@import "_lesshat";
 header{
 	position: relative;
 	z-index: 2;
@@ -24,12 +25,20 @@ header{
 		height: 80px;
 		border-bottom-left-radius: 40px;
 		border-bottom-right-radius: 40px;
+		.transition(height 0.8s ease-in-out);
 		//padding: 5px;
 		img{
 			width: 80px;
 			margin-top: 7px;
 			display: none;
 			padding: 7px;
+			.transition(margin-top 0.8s ease-in-out);
+		}
+		&.about{
+			height: 180px;
+			img{
+				margin-top: 107px;
+			}
 		}
 	}
 

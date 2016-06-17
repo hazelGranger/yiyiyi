@@ -185,17 +185,22 @@ $(function(){
 	var bgTransition = function(){
 		console.log(pageStates.bg,pageStates.desBg);
 		if(pageStates.bg != pageStates.desBg){
-			if (pageStates.bg == "light") {
-				App.bgDarker();
-				pageStates.bg = "dark";
-
-			}else if (pageStates.bg == "dark"){
+			if (pageStates.desBg == "light") {
 				App.bgLighter();
 				pageStates.bg = "light";
-			}else if(pageStates.bg == "white"){
-				console.log('white');
+				App.terrain.changeWireframeColor('#ffffff');
+
+			}else if (pageStates.desBg == "dark"){
+
+				App.bgDarker();
+				pageStates.bg = "dark";
+				App.terrain.changeWireframeColor('#ffffff');
+				
+			}else if(pageStates.desBg == "white"){
+
 				App.bgWhite();
 				pageStates.bg = "white";
+				App.terrain.changeWireframeColor('#dddddd');
 			}
 		}
 	}
@@ -212,13 +217,11 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 1;
 					App.terrain.rotateX90();
-					App.terrain.changeWireframeColor('#ffffff');
 
 				}else if (pageStates.desTerrain == 2) {
 					pageStates.animation = true;
 					pageStates.terrain = 2;
 					App.terrain.rotateX90();
-					App.terrain.changeWireframeColor('#dddddd');
 				}else if(pageStates.desTerrain == 3){
 					pageStates.animation = true;
 					pageStates.terrain = 3;
@@ -230,14 +233,12 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 0;
 					App.terrain.reset20();
-					App.terrain.changeWireframeColor('#ffffff');
 					console.log('10');
 				}else if(pageStates.desTerrain == 2){
 					pageStates.animation = true;
 					pageStates.terrain = 2;
 					App.terrain.stay();
 					console.log('12');
-					App.terrain.changeWireframeColor('#dddddd');
 				}else if(pageStates.desTerrain == 3){
 					pageStates.animation = true;
 					pageStates.terrain = 3;
@@ -250,13 +251,11 @@ $(function(){
 					pageStates.terrain = 0;
 					App.terrain.reset20();
 					console.log('20');
-					App.terrain.changeWireframeColor('#ffffff');
 					//App.terrain.reset20();
 				}else if (pageStates.desTerrain == 1){
 					pageStates.animation = true;
 					pageStates.terrain = 1;
 					App.terrain.stay();
-					App.terrain.changeWireframeColor('#ffffff');
 				}else if(pageStates.desTerrain == 3){
 					pageStates.animation = true;
 					pageStates.terrain = 3;
@@ -301,6 +300,7 @@ $(function(){
 	var mainAnimation = function(){
 		//pageStates.animation = true;
 		$('.bg').removeClass("flow");
+		$('.logo').removeClass("about");
 		$('.load-contents').removeClass("relative").addClass("active");
 		$('.content.index').addClass("active");
 		// $('.content.index').one('animationend',function(){
@@ -334,6 +334,7 @@ $(function(){
 	var worksAnimation = function(){
 		//pageStates.animation = true;
 		$('.bg').addClass("flow");
+		$('.logo').removeClass("about");
 		$('.load-contents').addClass("active").addClass("relative");
 		$('.content.works').addClass("active");
 
@@ -357,6 +358,7 @@ $(function(){
 
 	var aboutAnimation = function(){
 		$('.bg').addClass("flow");
+		$('.logo').addClass("about");
 		$('.load-contents').addClass("active").addClass("relative");
 		$('.content.about').addClass("active");
 
@@ -379,6 +381,7 @@ $(function(){
 
 	var contactAnimation = function(){
 		$('.bg').removeClass("flow");
+		$('.logo').removeClass("about");
 		$('.load-contents').addClass("active").removeClass("relative");
 		$('.content.contact').addClass("active");
 
