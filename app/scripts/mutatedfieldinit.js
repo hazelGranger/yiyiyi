@@ -176,7 +176,7 @@
       noise_range: 2.14,
       sombrero_amplitude: 0.6,
       sombrero_frequency: 10.0,
-      speed: 0.01,
+      speed: 0.1,
       segments: 324,
       wireframe_color: '#ffffff',
       perlin_passes: 1,
