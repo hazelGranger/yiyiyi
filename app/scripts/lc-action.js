@@ -7,7 +7,14 @@ $(document).ready(function() {
 	var UserRequest = AV.Object.extend('UserRequest');
 	var userRequest = new UserRequest();
 
+	var message = function(content){
+		return '<div class=\"message\">' +
+				   '<p>'+ content +'</p>' +
+				'</div>';
+	};
+
 	$("body").on("click","#info-submit",function(){
+
 		var info = {
 			name: function(){
 				return $('input[name="name"]').val();
@@ -46,11 +53,21 @@ $(document).ready(function() {
 		userRequest.save(info)
 		.then(function(){
 			console.log('success');
+			var msgElmt =  message("发送成功");
+			$(msgElmt).appendTo('body').show('slow');
+			setTimeout(function(){
+				$('.message').animate({opacity:'0'},500).remove();
+			}, 1000);
 		}).catch(function(err){
 			console.log('error:' + err);
+			var msgElmt =  message("发送失败");
+			$(msgElmt).appendTo('body').show('slow');
+			setTimeout(function(){
+				$('.message').animate({opacity:'0'},300).remove();
+			}, 1000);
 		});
 
-	})
+	});
 	
 });
 

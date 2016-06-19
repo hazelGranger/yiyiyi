@@ -139,6 +139,11 @@
        
     };
 
+    App.prototype.bgRed = function(){
+       this.renderer.setClearColor("#ff001a",1);
+       this.ambientLight.color = new THREE.Color("#ff001a");
+    };
+
     App.prototype.movecamera = function(){
       //相机目标坐标
        var desX = 0,

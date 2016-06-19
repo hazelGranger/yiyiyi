@@ -27,6 +27,7 @@ $(document).ready(function(){
 	}
 
 	$(".logo a").click(function(){
+		console.log('logo a');
 		if (header.headerOpen) {
 			header.close();
 		}else {
@@ -35,6 +36,7 @@ $(document).ready(function(){
 	});
 
 	$('body').on("click",".header-list",function(){
+		console.log('123');
 		if (header.headerOpen) {
 			header.close();
 		}

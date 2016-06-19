@@ -23,6 +23,10 @@ $(function(){
 			styles: ["/styles/asynchronous/page1.css","/styles/asynchronous/page2.css"],
 			scripts: ["/scripts/asynchronous/scripts1.js","/scripts/asynchronous/scripts2.js"],
 			dom: "/contents/contact.html"
+		},
+		form: {
+			route: "form/",
+			dom: "/contents/form.html"
 		}
 
 	}
@@ -74,17 +78,22 @@ $(function(){
 		
 	}).route('/',function(){
 		//console.log('main');
-	}).route('',function(){
-		console.log('123');
+	}).route('form/',function(){
+		removeCurrentContents();
+		loading();
+		formInit();
+		loadingComplete(formAnimation);
 	});
 
 
 	var routerResolve = function(e){
-		//console.log(e.type);
-		if (!e || e.type != "load") {
-			$(".logo a").trigger("click");
-		}
 		var hash = location.hash.replace(/^#/, '');
+		if (!e || e.type != "load") {
+			if (hash != "form/") {
+				$(".logo a").trigger("click");
+			}
+		}
+		
 		console.log(pageStates.loading,pageStates.animation,"rr");
 		if (!pageStates.loading) {
 			if (hash) {
@@ -201,6 +210,9 @@ $(function(){
 				App.bgWhite();
 				pageStates.bg = "white";
 				App.terrain.changeWireframeColor('#dddddd');
+			}else if(pageStates.desBg == "red"){
+				App.bgRed();
+				pageStates.bg = "red";
 			}
 		}
 	}
@@ -260,6 +272,10 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 3;
 					App.terrain.disappear();
+				}else if(pageStates.desTerrain == 4){
+					pageStates.animation = true;
+					pageStates.terrain = 4;
+					App.terrain.stay();
 				}
 				break;
 			case 3:
@@ -387,15 +403,40 @@ $(function(){
 
 	}
 
+	var formInit = function(){
+		pageStates.loading = true;
+		console.log('fi');
+		$("header").removeClass("black").addClass("white");
+		$(".loading").removeClass("black").addClass("white");
+		setDesStates("red",4);
+		bgTransition();
+		terrainTransition();
+
+		$.get(loadingSettings.form.dom,function(data){
+			console.log('load form');
+			$('.load-contents').html(data);
+		})
+
+	}
+
+	var formAnimation = function(){
+		console.log('fa');
+		$('.bg').addClass("flow");
+		$('.logo').removeClass("about");
+		$('.load-contents').addClass("active").addClass("relative");
+		$('.content.form').addClass("active");
+	}
+
 
 	var removeCurrentContents = function(){
+		console.log('removeCurrentContents');
 		$('.load-contents').empty().removeClass("active");
 
 	}
 
 	$(window).bind('hashchange',function(e,triggered){
 		e.preventDefault();
-		routerResolve();
+		routerResolve(e);
 	})
 
 	$('header a').click(function(){
