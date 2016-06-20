@@ -4,7 +4,7 @@
   "dependencies": {
     "bootstrap": "3.3.2",
     "modernizr": "~2.8.2",
-    "jquery": "1.11.2",
+    "jquery": "2.2.4",
     "html5shiv": "~3.7.2",
     "ExplorerCanvas": "*",
     "es5-shim": "~4.1.0",
@@ -14,8 +14,6 @@
     "jquery.placeholder": "~0.2.4",
     "font-awesome": "~4.3.0",
     "flexslider": "*",
-    "jquery-pjax": "latest",
-    "velocity": "latest",
     "leancloud-storage": "~1.0.0"
   }
 }

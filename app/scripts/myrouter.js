@@ -238,6 +238,10 @@ $(function(){
 					pageStates.animation = true;
 					pageStates.terrain = 3;
 					App.terrain.disappear();
+				}else if (pageStates.desTerrain == 4) {
+					pageStates.animation = true;
+					pageStates.terrain = 4;
+					App.terrain.rotateX90();
 				}
 				break;
 			case 1:
@@ -288,6 +292,27 @@ $(function(){
 					}, 600);
 				}else{
 
+				}
+				break;
+			case 4:
+				if (pageStates.desTerrain == 0) {
+					pageStates.animation = true;
+					pageStates.terrain = 0;
+					App.terrain.reset20();
+					console.log('20');
+					//App.terrain.reset20();
+				}else if (pageStates.desTerrain == 1){
+					pageStates.animation = true;
+					pageStates.terrain = 1;
+					App.terrain.stay();
+				}else if(pageStates.desTerrain == 2){
+					pageStates.animation = true;
+					pageStates.terrain = 4;
+					App.terrain.stay();
+				}else if(pageStates.desTerrain == 3){
+					pageStates.animation = true;
+					pageStates.terrain = 3;
+					App.terrain.disappear();
 				}
 		}
 	}
