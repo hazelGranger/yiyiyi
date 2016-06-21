@@ -25,24 +25,28 @@
 							<div class="input-group">
 								<span class="key">Name</span>
 								<input type="text" name="name">
+								<span class="v-info" id="m_name"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="input-group">
 								<span class="key">Email</span>
 								<input type="text" name="email">
+								<span class="v-info" id="m_email"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="input-group">
 								<span class="key">Company</span>
 								<input type="text" name="company">
+								<span class="v-info" id="m_company"></span>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="input-group">
 								<span class="key">Website</span>
 								<input type="text" name="website">
+								<span class="v-info" id="m_website"></span>
 							</div>
 						</div>
 					</div>
@@ -78,53 +82,58 @@
 							<input type="checkbox" value="7" name="accountType" id="r7">
 							<label class="key" for="r7">Motion</label>
 						</div>
+						<span class="v-info" id="m_accountType"></span>
 					</div>
 					<div class="form-group">
 						<h3>项目的时间规划</h3>
 						<div class="checkbox-group">
-							<input type="radio" name="duration" id="r8">
+							<input type="radio" value="1" name="duration" id="r8">
 							<label class="key" for="r8">2-3 months</label>
 						</div>
 						<div class="checkbox-group">
-							<input type="radio" name="duration" id="r9">
+							<input type="radio" value="2" name="duration" id="r9">
 							<label class="key" for="r9">3-6 months</label>
 						</div>
 						<div class="checkbox-group">
-							<input type="radio" name="duration" id="r10">
+							<input type="radio" value="0" name="duration" id="r10">
 							<label class="key" for="r10">No specific deadline</label>
 						</div>
+						<span class="v-info" id="m_duration"></span>
 					</div>
 					<div class="form-group">
 						<h3>您的大概预算</h3>
 						<div class="checkbox-group">
-							<input type="radio" name="budget" id="r11">
+							<input type="radio" value="1" name="budget" id="r11">
 							<label class="key" for="r11">20,000-50,000</label>
 						</div>
 						<div class="checkbox-group">
-							<input type="radio" name="budget" id="r12">
+							<input type="radio" value="2" name="budget" id="r12">
 							<label class="key" for="r12">50,000-100,000</label>
 						</div>
 						<div class="checkbox-group">
-							<input type="radio" name="budget" id="r13">
+							<input type="radio" value="3" name="budget" id="r13">
 							<label class="key" for="r13">100,000-300,000</label>
 						</div>
 						<div class="checkbox-group">
-							<input type="radio" name="budget" id="r14">
+							<input type="radio" value="0" name="budget" id="r14">
 							<label class="key" for="r14">很多很多..</label>
 						</div>
+						<span class="v-info" id="m_budget"></span>
 					</div>
 					<div class="form-group">
 						<h3>有关您项目的其它信息</h3>
 						<textarea name="others"></textarea>
+						<span class="v-info" id="m_others"></span>
 					</div>
 					<div class="form-group">
 						<h3>从哪里了解到 yiyiyi.studio</h3>
 						<div class="input-group">
 							<input type="text" name="where" class="placeholder" placeholder="不会是人行道上的小广告吧..">
+							<span class="v-info" id="m_where"></span>
 						</div>
 					</div>
 					<div class="form-group">
-						<input type="button" value="发送" id="info-submit">
+						<input type="button" value="发送" id="m-submit">
 					</div>
 				</div>
 			</div>

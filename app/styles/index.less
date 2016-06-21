@@ -849,7 +849,7 @@ section.article{
 					color: transparent;
 					.background-image(linear-gradient(to bottom,rgba(255,255,255,1) 0%,rgba(255,255,255,0.2) 100%));
 					.background-clip(text);
-					font-weight: normal;
+					font-weight: bold;
 					font-size: 20px;
 					text-align: left;
 				}
@@ -858,7 +858,7 @@ section.article{
 				.form-group{
 					margin-bottom: 30px;
 					.input-group{
-						margin: 15px 0;
+						margin: 20px 0;
 						border-bottom: 1px solid #333;
 						.transition(all 0.5s ease-in-out);
 						width: 100%;
@@ -877,6 +877,13 @@ section.article{
 						.key{
 							position: absolute;
 							z-index: 0;
+						}
+						.v-info{
+							position: absolute;
+							z-index: 0;
+							font-size: 10px;
+							color: #fff;
+							margin-top: 3px;
 						}
 
 						&.active{
@@ -925,12 +932,18 @@ section.article{
 						}
 					}
 					input[type="button"]{
+						margin-top: 20px;
 						padding: 5px 25px;
 						background: #000;
 						color: #fff;
 						border-radius: 20px;
 						outline: 0;
 						border: 1px solid #000;
+					}
+					.v-info{
+						display: block;
+						font-size: 10px;
+						color: #fff;
 					}
 				}
 			}

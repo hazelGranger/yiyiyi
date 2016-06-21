@@ -140,8 +140,8 @@
     };
 
     App.prototype.bgRed = function(){
-       this.renderer.setClearColor("#ff001a",1);
-       this.ambientLight.color = new THREE.Color("#ff001a");
+       this.renderer.setClearColor("#ec5151",1);
+       this.ambientLight.color = new THREE.Color("#ec5151");
     };
 
     App.prototype.movecamera = function(){

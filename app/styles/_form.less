@@ -20,7 +20,7 @@ textarea{
 
 //表单请求后返回消息
 .message{
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	margin-left: -50px;
@@ -34,11 +34,11 @@ textarea{
 	p{
 		line-height: 4.5;
 	}
-	// &.success{
-	// 	background-color: rgba(90, 248, 205, 0.8);
-	// }
-	// &.error{
-	// 	background-color: #ff001a;
-	// }
+	&.success{
+		background-color: rgba(90, 248, 205, 0.8);
+	}
+	&.error{
+		background-color: rgba(236, 81, 81, 0.8);
+	}
 }
 
