@@ -187,6 +187,7 @@ $(function(){
 	}
 
 	var setDesStates = function(desBg,desTerrain){
+		window.animating = true;
 		pageStates.desBg = desBg;
 		pageStates.desTerrain = desTerrain;
 	}
@@ -344,6 +345,7 @@ $(function(){
 		$('.logo').removeClass("about");
 		$('.load-contents').removeClass("relative").addClass("active");
 		$('.content.index').addClass("active");
+		window.animating = false;
 		// $('.content.index').one('animationend',function(){
 		// 	console.log('animationend');
 		// });
@@ -378,7 +380,7 @@ $(function(){
 		$('.logo').removeClass("about");
 		$('.load-contents').addClass("active").addClass("relative");
 		$('.content.works').addClass("active");
-
+		window.animating = false;
 		console.log(pageStates.loading,pageStates.animation);
 	}
 
@@ -402,7 +404,7 @@ $(function(){
 		$('.logo').addClass("about");
 		$('.load-contents').addClass("active").addClass("relative");
 		$('.content.about').addClass("active");
-
+		window.animating = false;
 	}
 
 	var contactInit = function(){
@@ -425,7 +427,7 @@ $(function(){
 		$('.logo').removeClass("about");
 		$('.load-contents').addClass("active").removeClass("relative");
 		$('.content.contact').addClass("active");
-
+		window.animating = false;
 	}
 
 	var formInit = function(){
@@ -450,6 +452,7 @@ $(function(){
 		$('.logo').removeClass("about");
 		$('.load-contents').addClass("active").addClass("relative");
 		$('.content.form').addClass("active");
+		window.animating = false;
 	}
 
 

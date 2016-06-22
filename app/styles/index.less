@@ -448,6 +448,7 @@ section.bg{
 			//margin-top: 150px;
 
 			section{
+				padding: 100px 0;
 				h2{
 					color: transparent;
 					.background-image(linear-gradient(to bottom, #333 0%,#eee 100%));
@@ -476,7 +477,6 @@ section.bg{
 			}
 
 			section.qa{
-				padding: 100px 0;
 				p.quote{
 					text-align: center;
 				}
@@ -604,7 +604,6 @@ section.bg{
 			}
 
 			section.charity{
-				padding: 100px 0;
 				.background-image(linear-gradient(to bottom,rgba(255,2555,2555,0.5) 0%,rgba(90, 248, 205, 0.8) 100%));
 				h1{
 					color: #FF7488;
@@ -625,14 +624,28 @@ section.bg{
 	}
 }
 
+@media(max-width: 767px){
+	.load-contents.active{
+		.about{
+			section.intro{
+				padding-top: 200px;
+				padding-bottom: 0;
+			}
+			section{
+				padding: 30px 0;
+			}
+		}
+	}
+}
 
-//contact
+
+//yiyiyi
 .load-contents{
 	opacity: 0;
 	.transition(opacity 0.5s ease-in-out);
 	&.active{
 		opacity: 1;
-		.contact{
+		.yiyiyi{
 
 			section.langting{
 				position: absolute;
@@ -802,6 +815,11 @@ section.article{
 				letter-spacing: 0;
 				word-wrap: break-word;
 				color: #eee;
+				&.pct{
+					margin: -.5em 0 .5em .5em;
+					float: none;
+					display: block;
+				}
 			}
 			&:after{
 				content: '';
@@ -950,6 +968,23 @@ section.article{
 		}
 	}
 	
+}
+
+@media(max-width: 767px){
+	.load-contents.active{
+		.form{
+			section.service {
+				margin-top: 50px;
+				&:first-child{
+					margin-top: 90px;
+				}
+				.vertical-text{
+					position: relative;
+					margin-bottom: 50px;
+				}	
+			}
+		}
+	}
 }
 
 

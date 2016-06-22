@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	window.animating = false;
 	var header ={
 		dom: $('header'),
 		list: $('.header-list'),
@@ -27,11 +27,13 @@ $(document).ready(function(){
 	}
 
 	$(".logo a").click(function(){
-		console.log('logo a');
+		console.log('logo a',window.animating);
 		if (header.headerOpen) {
 			header.close();
 		}else {
-			header.open();
+			if (!window.animating) {
+				header.open();
+			}
 		}
 	});
 
