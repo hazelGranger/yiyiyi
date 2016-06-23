@@ -88,17 +88,21 @@ $(function(){
 
 	var routerResolve = function(e){
 		var hash = location.hash.replace(/^#/, '');
-		if (!e || e.type != "load") {
+		console.log(e);
+		//判断是加载行为还是haschange行为,click行为trigger会收起导航栏
+		if (!e || e.type != "load" ) {
 			if (hash != "form/") {
 				$(".logo a").trigger("click");
 			}
 		}
 		
 		console.log(pageStates.loading,pageStates.animation,"rr");
-		if (!pageStates.loading) {
+		//只有加载完成和 haschange 事件 和 load 事件可以触发解析hash的操作
+		if (!pageStates.loading && e.type != "click") {
 			if (hash) {
 				//other pages with # in router
 				var match = $.routeMatches(hash);
+				console.log("match",match);
 				if (match) {
 					match.route.callback.apply(match.route.callback, match.args);
 				}
@@ -169,10 +173,6 @@ $(function(){
 					console.log('lc123');
 				}, 1500);
 			}
-
-			// setTimeout(function(){
-			// 	console.log('123')
-			// }, 1000);
 		}else{
 			$('.loading').delay(500).fadeOut(1000,function(){
 				pageStates.loading = false;
@@ -461,14 +461,15 @@ $(function(){
 		$('.load-contents').empty().removeClass("active");
 
 	}
-
+	//监听url hash 变化
 	$(window).bind('hashchange',function(e,triggered){
+		console.log('hashchange');
 		e.preventDefault();
 		routerResolve(e);
 	})
-
-	$('header a').click(function(){
-		//routerResolve();
+	//点击触发url解析，但不会解析。。只会触发导航栏关闭（url不变时点击的弥补）
+	$('.header-list a').click(function(e){
+		routerResolve(e);
 	});
 
 	$('body').click(function(){
@@ -479,7 +480,7 @@ $(function(){
 		console.log('animationComplete');
 		pageStates.animation = false;
 	})
-
+	//加载时触发 url解析
 	$(window).load(routerResolve);
 
 
