@@ -139,6 +139,9 @@ $(document).ready(function() {
 				$(msgElmt).appendTo('body').show('slow');
 				setTimeout(function(){
 					$('.message').animate({opacity:'0'},500).remove();
+					setTimeout(function(){
+						window.location.href ="/#about/";
+					}, 500);
 				}, 1000);
 			}).catch(function(err){
 				console.log('error:' + err);
