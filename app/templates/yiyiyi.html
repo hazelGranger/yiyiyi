@@ -93,8 +93,8 @@
 	<section class="article">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12">
-					<div class="vertical-text">
+				<div class="col-sm-12 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+					<div class="vertical-text" id="countMarginTop">
 						<div class="textbox hidden-xs">
 							<p class="title">
 								<span>非正式魅力</span>
@@ -122,7 +122,37 @@
 							</p>
 							<p class="author">
 								<span class="name">陈丹青</span>
-								<span>︽局部 <span class="btq-r">︾</span>- 第八话：非正式魅力</span>
+								<span>︽局部 <span class="btq-r">︾</span><span class="pct">|</span> 第八话<span class="quote-r">：</span>非正式魅力</span>
+							</p>
+						</div>
+					</div>
+					<div class="horizon-text">
+						<div class="only-show-xs">
+							<h3>非正式魅力</h3>
+							<p>	
+								那这又牵扯到另一句话，就是“ 书画同源”，
+								这个是跟洋人扯不清楚的一个事情，怎么
+								字和画是同一个来源，讲不清楚的一个
+								事情，但我现在强拉了这个书法来说事，
+								是为了把“ 未完成”这个词转化一下变成另
+								外一个词，叫什么呢，叫“ 非正式”，英语叫做
+								“ unofficial”。西洋的规矩就是非正式的作
+								品一定要比正式作品的地位低，而且差不
+								多是一个贬义。可是你在中国书法史上，
+								最最被推崇的几个书法的极品，全部是非
+								正式的。︽书论︾里有两句话解释了
+								这个问题，它突出了一个价值观，很简
+								单，就是“ 碑不如告，告不如书”，什么意
+								思呢？就是论书写的滋味，石刻的碑文不
+								如墨写的文件，墨写的文件不如私信的草
+								稿，就这个意思，那这是中国书法的最高
+								界。这种境界西洋人也懂得其实，虽然
+								他们没有对应的词，可是欧美现代大量杰
+								作，也可以说与物传神，尽其妙也。
+							</p>
+							<p class="text-right">
+								<span class="author">陈丹青</span><br/>
+								《局部》——  第八话：非正式魅力
 							</p>
 						</div>
 					</div>
@@ -130,4 +160,10 @@
 			</div>
 		</div>
 	</section>
+{% endblock %}
+{% block scripts %}
+	 {% parent %}
+	 <!-- build:js scripts/yiyiyi.js -->
+	 <script type="text/javascript" src="/scripts/pos.js"></script>
+	 <!-- endbuild -->
 {% endblock %}
