@@ -90,10 +90,11 @@ $(function(){
 		var hash = location.hash.replace(/^#/, '');
 		console.log(e);
 		//判断是加载行为还是haschange行为,click行为trigger会收起导航栏
-		if (!e || e.type != "load" ) {
-			if (hash != "form/") {
-				$(".logo a").trigger("click");
-			}
+		if (e && e.type == "click" ) {
+			$(".logo a").trigger("click");
+			// if (hash != "form/") {
+			// 	$(".logo a").trigger("click");
+			// }
 		}
 		
 		console.log(pageStates.loading,pageStates.animation,"rr");

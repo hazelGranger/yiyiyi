@@ -16,6 +16,7 @@ $(document).ready(function() {
 
 	$("body").on("click","#m-submit",function(){
 
+		//校验结果信息集
 		var validation = {
 			name: 0,
 			email: 0,
