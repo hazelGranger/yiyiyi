@@ -14,7 +14,8 @@ $(document).ready(function(){
 				var tmp = new Array();
 				for(var i in arr){
 				//该元素在tmp内部不存在才允许追加
-					if(tmp.indexOf(arr[i])==-1){
+				var Regx = /^[A-Za-z0-9]*$/;
+					if(tmp.indexOf(arr[i])==-1 && !Regx.test(arr[i])){
 						tmp.push(arr[i]);
 					}
 				}
