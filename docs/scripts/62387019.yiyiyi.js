@@ -1,0 +1,1 @@
+$(document).ready(function(){var a=function(a){if(console.log("marginTopCount"),a)if($(window).width()>767){var b=$(window).height()/2-$(a).height()/2;$(a).css("margin-top",b+"px")}else $(a).css("margin-top","0")};a("#countMarginTop"),$(window).resize(function(){a("#countMarginTop")})});

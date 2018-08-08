@@ -16,7 +16,7 @@ module.exports = function(grunt) {
   // Configurable paths
   var config = {
     app: 'app',
-    dist: 'dist'
+    dist: 'docs'
   };
 
   // Define the configuration for all the tasks
@@ -221,7 +221,8 @@ module.exports = function(grunt) {
             '<%= config.dist %>/styles/{,*/,**/,***/}*.css',
             '!<%= config.dist %>/styles/asynchronous/*.css',//除去异步文件夹里的css
             '<%= config.dist %>/images/{,*/,**/,***/}*.*',
-            '<%= config.dist %>/fonts/{,*/,**/,***/}*.*'
+            '<%= config.dist %>/fonts/{,*/,**/,***/}*.*',
+            '!<%= config.dist %>/images/norename/*.*'
             // ,
             // '<%= config.dist %>/*.{ico,png}'
           ]
