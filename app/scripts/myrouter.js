@@ -3,14 +3,14 @@ $(function(){
 	var loadingSettings = {
 		index: {
 			route: "/",
-			scripts: ["/scripts/asynchronous/index.js"],
-			dom: "/contents/index2.html"
+			scripts: ["./scripts/asynchronous/index.js"],
+			dom: "./contents/index2.html"
 		},
 		works: {
 			route: "works/",
-			styles: ["/styles/page1.css"],
-			scripts: ["/scripts/asynchronous/scripts1.js"],
-			dom: "/contents/works.html"
+			styles: ["./styles/page1.css"],
+			scripts: ["./scripts/asynchronous/scripts1.js"],
+			dom: "./contents/works.html"
 		},
 		about: {
 			route: "about/",
@@ -20,13 +20,13 @@ $(function(){
 		},
 		contact: {
 			route: "contact/",
-			styles: ["/styles/asynchronous/page1.css","/styles/asynchronous/page2.css"],
-			scripts: ["/scripts/asynchronous/scripts1.js","/scripts/asynchronous/scripts2.js"],
-			dom: "/contents/contact.html"
+			styles: ["./styles/asynchronous/page1.css","./styles/asynchronous/page2.css"],
+			scripts: ["./scripts/asynchronous/scripts1.js","./scripts/asynchronous/scripts2.js"],
+			dom: "./contents/contact.html"
 		},
 		form: {
 			route: "form/",
-			dom: "/contents/form.html"
+			dom: "./contents/form.html"
 		}
 
 	}
@@ -69,13 +69,13 @@ $(function(){
 		loadingComplete(aboutAnimation);
 
 	}).route('contact/',function(){
-		
+
 		removeCurrentContents();
 		loading();
 		contactInit();
 		loadingComplete(contactAnimation);
 		//console.log('contact');
-		
+
 	}).route('/',function(){
 		//console.log('main');
 	}).route('form/',function(){
@@ -96,7 +96,7 @@ $(function(){
 			// 	$(".logo a").trigger("click");
 			// }
 		}
-		
+
 		console.log(pageStates.loading,pageStates.animation,"rr");
 		//只有加载完成和 haschange 事件 和 load 事件可以触发解析hash的操作
 		if (!pageStates.loading && e.type != "click") {
@@ -138,12 +138,12 @@ $(function(){
 
 		console.log('loading');
 		if (callback && typeof(callback) === "function") {
-			
+
 			$('.loading').fadeIn(500,callback);
 		}else{
 			$('.loading').fadeIn(500);
 		}
-		
+
 	}
 
 	var loadingComplete =  function(callback){
@@ -159,7 +159,7 @@ $(function(){
 				setTimeout(function(){
 					pageStates.loading = false;
 					console.log('lc1');
-				}, 1500); 
+				}, 1500);
 
 				$('.load-contents').one("terrainAnimation",function (argument) {
 					console.log('trabm');
@@ -179,7 +179,7 @@ $(function(){
 				pageStates.loading = false;
 			});
 		}
-		
+
 	}
 
 	var setStates = function(bg,terrain){
@@ -206,7 +206,7 @@ $(function(){
 				App.bgDarker();
 				pageStates.bg = "dark";
 				App.terrain.changeWireframeColor('#ffffff');
-				
+
 			}else if(pageStates.desBg == "white"){
 
 				App.bgWhite();
@@ -226,7 +226,7 @@ $(function(){
 		console.log(pageStates.terrain,pageStates.desTerrain,"tts");
 
 		switch (pageStates.terrain) {
-			case 0: 
+			case 0:
 				if (pageStates.desTerrain == 1) {
 					pageStates.animation = true;
 					pageStates.terrain = 1;
@@ -320,7 +320,7 @@ $(function(){
 	}
 
 	var mainInit = function(){
-		
+
 		pageStates.loading = true;
 		setDesStates("light",0);
 		$("header").removeClass("white").addClass("black");
@@ -358,7 +358,7 @@ $(function(){
 		// 	console.log('animationend');
 		// 	pageStates.animation = false;
 		// },false);
-		
+
 	}
 
 	var worksInit = function(){
@@ -390,7 +390,7 @@ $(function(){
 		console.log('ai');
 		$("header").removeClass("white").addClass("black");
 		$(".loading").removeClass("white").addClass("black");
-		
+
 		setDesStates("white",2);
 		bgTransition();
 		terrainTransition();
