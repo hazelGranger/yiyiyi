@@ -14,9 +14,9 @@ $(function(){
 		},
 		about: {
 			route: "about/",
-			styles: ["/styles/page1.css"],
-			scripts: ["/scripts/asynchronous/scripts1.js"],
-			dom: "/contents/about.html"
+			styles: ["./styles/page1.css"],
+			scripts: ["./scripts/asynchronous/scripts1.js"],
+			dom: "./contents/about.html"
 		},
 		contact: {
 			route: "contact/",
